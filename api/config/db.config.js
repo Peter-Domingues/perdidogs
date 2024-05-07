@@ -8,10 +8,7 @@ const connect = () => {
       process.env.MONGO_CONNECTION_STRING
   );
 
-  mongoose.connect(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  mongoose.connect(url);
 
   mongoose.connection.once("open", async () => {
     logger.info("Connected to database");

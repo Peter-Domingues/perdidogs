@@ -1,11 +1,13 @@
 const express = require("express");
+const cors = require('cors');
 require("dotenv").config();
 
-const inundogsController = require("./api/controllers/inundogs.controller");
+const inundogsController = require("./controllers/inundogs.controller");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/api/inundogs", (req, res) => {
@@ -15,13 +17,13 @@ app.get("/api/inundogs", (req, res) => {
 app.post("/api/inundog", (req, res) => {
   console.log(req.body);
   inundogsController
-    .createInundog(req.body.inundog)
+    .createInundog(req.body)
     .then((data) => res.json(data));
 });
 
 app.put("/api/inundog/:id", (req, res) => {
   inundogsController
-    .updateInundog({ _id: req.params.id }, req.body.inundog)
+    .updateInundog({ _id: req.params.id }, req.body)
     .then((data) => res.json(data));
 });
 
