@@ -1,8 +1,8 @@
 import { changeContato } from "@/store/reducers/formReducer";
-import { increment } from "@/store/reducers/pageReducer";
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import InputMask from "react-input-mask";
 
 const Contato = () => {
   const dispatch = useDispatch();
@@ -13,18 +13,15 @@ const Contato = () => {
 
   const onChangeNomeResponsavel = (e) => {
     setNomeResponsavel(e.target.value);
-    // Reset error state when user starts typing
     setNomeResponsavelError(false);
   };
 
   const onChangeTelefone = (e) => {
     setTelefone(e.target.value);
-    // Reset error state when user starts typing
     setTelefoneError(false);
   };
 
   const handleSend = () => {
-    // Check if fields are empty
     if (nomeResponsavel.trim() === "") {
       setNomeResponsavelError(true);
     }
@@ -51,13 +48,23 @@ const Contato = () => {
         error={nomeResponsavelError}
         helperText={nomeResponsavelError ? "Este campo é obrigatório" : ""}
       />
-      <TextField
-        label="Telefone:"
+      <InputMask
+        mask="(99) 99999-9999"
         value={telefone}
         onChange={onChangeTelefone}
-        error={telefoneError}
-        helperText={telefoneError ? "Este campo é obrigatório" : ""}
-      />
+      >
+        {() => (
+          <TextField
+            label="Telefone:"
+            error={telefoneError}
+            helperText={
+              telefoneError
+                ? "Este campo é obrigatório"
+                : "Formato: (99) 99999-9999"
+            }
+          />
+        )}
+      </InputMask>
       <Button onClick={handleSend}> Enviar</Button>
     </div>
   );
