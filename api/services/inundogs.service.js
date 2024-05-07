@@ -7,6 +7,10 @@ class InundogsService {
     return await inundogsRepository.getInundogs();
   }
 
+  async getFilteredInundogs(filtro) {
+    return await inundogsRepository.getInundogs(filtro);
+  }
+
   async createInundog(inundog) {
     return await inundogsRepository.createInundog(inundog);
   }

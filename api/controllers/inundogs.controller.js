@@ -7,6 +7,11 @@ class InundogsController {
     return await inundogsService.getInundogs();
   }
 
+  async getFilteredInundogs(filtro) {
+    logger.info("Controller: getFilteredInundogs", filtro);
+    return await inundogsService.getFilteredInundogs(filtro);
+  }
+
   async createInundog(inundog) {
     logger.info("Controller: createInundog", inundog);
     return await inundogsService.createInundog(inundog);

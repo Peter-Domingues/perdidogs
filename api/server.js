@@ -14,6 +14,20 @@ app.get("/api/inundogs", (req, res) => {
   inundogsController.getInundogs().then((data) => res.json(data));
 });
 
+app.get("/api/inundogs", (req, res) => {
+  const filtro = {};
+
+  if(req.query.raca) filtro.raca = req.query.raca;
+  if(req.query.porte) filtro.porte = req.query.porte;
+  if(req.query.sexo) filtro.sexo = req.query.sexo;
+  if(req.query.especie) filtro.especie = req.query.especie;
+  if(req.query.cidade) filtro.cidade = req.query.cidade;
+  if(req.query.comportamento) filtro.comportamento = req.query.comportamento;
+  if(req.query.faixaEtaria) filtro.faixaEtaria = req.query.faixaEtaria;
+
+  inundogsController.getFilteredInundogs(filtro).then((data) => res.json(data));
+});
+
 app.post("/api/inundog", (req, res) => {
   console.log(req.body);
   inundogsController

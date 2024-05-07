@@ -9,7 +9,11 @@ class InundogsRepository {
 
   async getInundogs() {
     const inundogs = await Inundogs.find({});
-    console.log("inundogs:::", inundogs);
+    return inundogs;
+  }
+
+  async getFilteredInundogs(filtro) {
+    const inundogs = await Inundogs.find({filtro});
     return inundogs;
   }
 
