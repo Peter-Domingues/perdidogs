@@ -3,12 +3,8 @@ const inundogsRepository = require("../repositories/inundogs.repository");
 class InundogsService {
   constructor() {}
 
-  async getInundogs() {
-    return await inundogsRepository.getInundogs();
-  }
-
-  async getFilteredInundogs(filtro) {
-    return await inundogsRepository.getInundogs(filtro);
+  async getFilteredInundogs(filtro, page, limit) {
+    return await inundogsRepository.getFilteredInundogs(filtro, page, limit);
   }
 
   async createInundog(inundog) {
