@@ -45,8 +45,16 @@ export default function PetCard({
     setExpanded(!expanded);
   };
 
+  const handleInformarClick = () => {
+    const mailtoLink = `mailto:perdidogseresgatos@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  };
+
   const hasPorte = porte ? `de porte ${porte}, ` : "";
   const hasRaca = raca ? `da raça ${raca}, ` : "";
+
+  const subject = `Informe de ${especie} encontrado`;
+  const body = `Oi, minha família me encontrou!\n\nFoto: ${foto}\nSexo: ${sexo}\nCidade: ${cidade}`;
 
   return (
     <Card sx={{ maxWidth: 345 }} className="card-container">
@@ -56,7 +64,7 @@ export default function PetCard({
         action={
           <div className="found-button-container">
             <label className="label-found-button">Família encontrada?</label>
-            <FoundButton aria-label="settings">Informar</FoundButton>
+            <FoundButton aria-label="settings" onClick={handleInformarClick}>Informar</FoundButton>
           </div>
         }
       />

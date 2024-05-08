@@ -10,12 +10,13 @@ class InundogsRepository {
   async getFilteredInundogs(filtro, page, limit) {
     const startIndex = (page - 1) * limit;
 
-    const totalDocuments = await Inundogs.countDocuments().exec();
+    const totalDocuments = await Inundogs.countDocuments(filtro).exec();
     const totalPages = Math.ceil(totalDocuments / limit);
 
     const inundogs = await Inundogs.find(filtro)
       .limit(limit)
       .skip(startIndex)
+      .sort({ createdAt: -1 })
       .exec();
 
     return { inundogs, totalPages, currentPage: page };
