@@ -2,9 +2,9 @@ const inundogsService = require("../services/inundogs.service");
 const logger = require("../logger/api.logger");
 
 class InundogsController {
-  async getInundogs() {
-    logger.info("Controller: getInundogs");
-    return await inundogsService.getInundogs();
+  async getFilteredInundogs(filtro, page, limit) {
+    logger.info("Controller: getFilteredInundogs", filtro);
+    return await inundogsService.getFilteredInundogs(filtro, page, limit);
   }
 
   async createInundog(inundog) {

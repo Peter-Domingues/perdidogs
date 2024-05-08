@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
 
+const contatoSchema = new mongoose.Schema({
+  responsavel: "string",
+  telefone: "string",
+});
+
 const inundogsSchema = new mongoose.Schema({
   raca: "string",
   foto: "Buffer",
@@ -13,8 +18,7 @@ const inundogsSchema = new mongoose.Schema({
   castrado: "string",
   saude: "string",
   cor: "string",
-  responsavel: "string",
-  telefone: "string",
+  contato: contatoSchema,
 });
 
 const Inundogs = mongoose.model("inundogs", inundogsSchema);

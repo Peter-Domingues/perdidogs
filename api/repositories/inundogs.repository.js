@@ -7,10 +7,18 @@ class InundogsRepository {
     connect();
   }
 
-  async getInundogs() {
-    const inundogs = await Inundogs.find({});
-    console.log("inundogs:::", inundogs);
-    return inundogs;
+  async getFilteredInundogs(filtro, page, limit) {
+    const startIndex = (page - 1) * limit;
+
+    const totalDocuments = await Inundogs.countDocuments().exec();
+    const totalPages = Math.ceil(totalDocuments / limit);
+
+    const inundogs = await Inundogs.find(filtro)
+      .limit(limit)
+      .skip(startIndex)
+      .exec();
+
+    return { inundogs, totalPages, currentPage: page };
   }
 
   async createInundog(inundog) {
