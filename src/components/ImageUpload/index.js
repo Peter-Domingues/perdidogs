@@ -11,9 +11,10 @@ const ImageUpload = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      dispatch(changeFoto(file));
       const reader = new FileReader();
       reader.onload = () => {
+        dispatch(changeFoto(file));
+
         setImage(reader.result);
       };
       reader.readAsDataURL(file);

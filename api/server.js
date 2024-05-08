@@ -1,8 +1,22 @@
 const express = require("express");
 const cors = require("cors");
+const multer = require("multer");
+const path = require("path");
+
 require("dotenv").config();
 
 const inundogsController = require("./controllers/inundogs.controller");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/images/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -10,9 +24,17 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+app.post("/api/upload", upload.single("image"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send("Nenhum arquivo enviado.");
+  }
+
+  res.send(`images/${req.file.path.split("\\")[2]}`);
+});
+
 app.get("/api/inundogs", (req, res) => {
   const filtro = {};
-  const { page = 1, limit = 10 } = req.query;
+  const { page = 1, limit = 6 } = req.query;
 
   if (req.query.raca) filtro.raca = req.query.raca;
   if (req.query.porte) filtro.porte = req.query.porte;
@@ -27,7 +49,7 @@ app.get("/api/inundogs", (req, res) => {
     .then((data) => res.json(data));
 });
 
-app.post("/api/inundog", (req, res) => {
+app.post("/api/inundog", async (req, res) => {
   inundogsController.createInundog(req.body).then((data) => res.json(data));
 });
 

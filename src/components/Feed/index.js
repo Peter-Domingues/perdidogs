@@ -1,121 +1,50 @@
 import PetCard from "../PetCard";
 import { Pagination } from "@mui/material";
+import { getInundogs } from "../../api/apiService";
+import { useEffect, useState, useCallback } from "react";
 
 const Feed = () => {
-  const allPets = [
-    {
-      especie: "Cachorro",
-      sexo: "Macho",
-      porte: "P",
-      raca: "SRD (Vira-Latas)",
-      cidade: "Canoas",
-      cor: "Amarelo",
-      foto: "",
-      saude: "Saudável",
-      comportamento: "Dócil",
-      faixaEtaria: "Filhote",
-      endereco: "Galpão da Ulbra",
-      responsavel: "Peter",
-      telefone: "51999999",
-    },
-    {
-      especie: "Cachorro",
-      sexo: "Macho",
-      porte: "P",
-      raca: "SRD (Vira-Latas)",
-      cidade: "Canoas",
-      cor: "Amarelo",
-      foto: "",
-      saude: "Saudável",
-      comportamento: "Dócil",
-      faixaEtaria: "Filhote",
-      endereco: "Galpão da Ulbra",
-      responsavel: "Peter",
-      telefone: "51999999",
-    },
-    {
-      especie: "Cachorro",
-      sexo: "Macho",
-      porte: "P",
-      raca: "SRD (Vira-Latas)",
-      cidade: "Canoas",
-      cor: "Amarelo",
-      foto: "",
-      saude: "Saudável",
-      comportamento: "Dócil",
-      faixaEtaria: "Filhote",
-      endereco: "Galpão da Ulbra",
-      responsavel: "Peter",
-      telefone: "51999999",
-    },
-    {
-      especie: "Cachorro",
-      sexo: "Macho",
-      porte: "P",
-      raca: "SRD (Vira-Latas)",
-      cidade: "Canoas",
-      cor: "Amarelo",
-      foto: "",
-      saude: "Saudável",
-      comportamento: "Dócil",
-      faixaEtaria: "Filhote",
-      endereco: "Galpão da Ulbra",
-      responsavel: "Peter",
-      telefone: "51999999",
-    },
-    {
-      especie: "Cachorro",
-      sexo: "Macho",
-      porte: "P",
-      raca: "SRD (Vira-Latas)",
-      cidade: "Canoas",
-      cor: "Amarelo",
-      foto: "",
-      saude: "Saudável",
-      comportamento: "Dócil",
-      faixaEtaria: "Filhote",
-      endereco: "Galpão da Ulbra",
-      responsavel: "Peter",
-      telefone: "51999999",
-    },
-    {
-      especie: "Cachorro",
-      sexo: "Macho",
-      porte: "P",
-      raca: "SRD (Vira-Latas)",
-      cidade: "Canoas",
-      cor: "Amarelo",
-      foto: "",
-      saude: "Saudável",
-      comportamento: "Dócil",
-      faixaEtaria: "Filhote",
-      endereco: "Galpão da Ulbra",
-      responsavel: "Peter",
-      telefone: "51999999",
-    },
-  ];
+  const [data, setData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handleChangePage = (e, value) => {
+    setCurrentPage(value);
+  };
+
+  console.log(currentPage);
+
+  const getDogs = useCallback(
+    (currentPage) =>
+      getInundogs({ page: currentPage }).then((res) => setData(res)),
+    [getInundogs]
+  );
+
+  useEffect(() => {
+    getDogs(currentPage);
+  }, [currentPage]);
 
   return (
     <div className="feed-container">
-      {allPets.map((pet) => (
-        <PetCard
-          especie={pet.especie}
-          sexo={pet.sexo}
-          raca={pet.raca}
-          cidade={pet.cidade}
-          comportamento={pet.comportamento}
-          faixaEtaria={pet.faixaEtaria}
-          foto={pet.foto}
-          responsavel={pet.responsavel}
-          telefone={pet.telefone}
-          cor={pet.cor}
-          endereco={pet.endereco}
-          observacao={pet.observacao}
-          porte={pet.porte}
-          saude={pet.saude}
-        />
-      ))}
-      <Pagination count={10} />
+      {data &&
+        data.inundogs.map((pet) => (
+          <PetCard
+            especie={pet.especie}
+            sexo={pet.sexo}
+            raca={pet.raca}
+            cidade={pet.cidade}
+            comportamento={pet.comportamento}
+            faixaEtaria={pet.faixaEtaria}
+            foto={pet.foto}
+            responsavel={pet.responsavel}
+            telefone={pet.telefone}
+            cor={pet.cor}
+            endereco={pet.endereco}
+            observacao={pet.observacao}
+            porte={pet.porte}
+            saude={pet.saude}
+          />
+        ))}
+      <Pagination count={data?.totalPages} onChange={handleChangePage} />
     </div>
   );
 };

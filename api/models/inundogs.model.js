@@ -7,7 +7,7 @@ const contatoSchema = new mongoose.Schema({
 
 const inundogsSchema = new mongoose.Schema({
   raca: "string",
-  foto: "Buffer",
+  foto: "string",
   endereco: "string",
   porte: "string",
   sexo: "string",

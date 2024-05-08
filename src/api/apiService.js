@@ -4,9 +4,27 @@ const apiClient = axios.create({
   baseURL: process.env.API_BASE_URL,
 });
 
-export const getInundogs = async (params) => {
+export const uploadImage = async (file) => {
+  const formData = new FormData();
+  formData.append("image", file);
+
   try {
-    const response = await apiClient.get("/inundogs", params);
+    const response = await apiClient.post("/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error while uploading the image:", error);
+    throw error;
+  }
+};
+
+export const getInundogs = async (params) => {
+  console.log(params);
+  try {
+    const response = await apiClient.get("/inundogs", { ...{ params } });
     return response.data;
   } catch (error) {
     console.error("Error while fetching inundogs:", error);
@@ -16,6 +34,7 @@ export const getInundogs = async (params) => {
 
 export const createInundog = async (inundogData) => {
   try {
+    console.log({ inundogData });
     const response = await apiClient.post("/inundog", inundogData);
     return response.data;
   } catch (error) {

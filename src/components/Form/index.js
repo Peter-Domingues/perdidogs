@@ -8,6 +8,8 @@ import Porte from "./pages/Porte";
 import Endereco from "./pages/Endereco";
 import Foto from "./pages/Foto";
 import { useDispatch, useSelector } from "react-redux";
+import { useCallback } from "react";
+import { createInundog, uploadImage } from "../../api/apiService";
 import { decrement, increment } from "@/store/reducers/pageReducer";
 import Cidade from "./pages/Cidade";
 import Observacao from "./pages/Observacao";
@@ -24,7 +26,7 @@ import Resumo from "./pages/Resumo";
 const Form = () => {
   const dispatch = useDispatch();
   const counter = useSelector((state) => state.counter.value);
-  const especie = useSelector((state) => state.form.especie);
+  const form = useSelector((state) => state.form);
 
   const pages = [
     { title: "Qual a espécie?", component: <Especie /> },
@@ -76,7 +78,7 @@ const Form = () => {
 
   const handleNext = () => {
     if (counter + 1 < pages.length) {
-      if (counter == 1 && especie == "gato") {
+      if (counter == 1 && form.especie == "gato") {
         dispatch(increment());
         dispatch(increment());
       }
@@ -84,19 +86,37 @@ const Form = () => {
     }
   };
 
+  const createDog = useCallback(
+    () =>
+      uploadImage(form.foto).then((res) =>
+        createInundog({
+          foto: res,
+          especie: form.especie,
+          sexo: form.sexo,
+          raca: form.raca,
+          porte: form.porte,
+          cidade: form.cidade,
+          endereco: form.endereco,
+          observacao: form.obs,
+          cor: form.cor,
+          comportamento: form.comportamento,
+          faixaEtaria: form.faixaEtaria,
+          saude: form.saude,
+          castrado: form.castrado,
+          contato: form.contato,
+        }).then((res) => console.log(res))
+      )[(uploadImage, createInundog)]
+  );
+
   const handleFinish = () => {
-    if (counter + 1 < pages.length) {
-      if (counter == 1 && especie == "gato") {
-        dispatch(increment());
-        dispatch(increment());
-      }
-      dispatch(increment());
-    }
+    console.log(form.foto);
+
+    createDog();
   };
 
   const handleBack = () => {
     if (counter - 1 >= 0) {
-      if (counter == 4 && especie == "gato") {
+      if (counter == 4 && form.especie == "gato") {
         dispatch(decrement());
         dispatch(decrement());
       }

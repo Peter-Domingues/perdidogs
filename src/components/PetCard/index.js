@@ -9,7 +9,6 @@ import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Button } from "@mui/material";
 import { FoundButton } from "./petCard.styles";
 
 const ExpandMore = styled((props) => {
@@ -49,16 +48,6 @@ export default function PetCard({
   const hasPorte = porte ? `de porte ${porte}, ` : "";
   const hasRaca = raca ? `da raça ${raca}, ` : "";
 
-  useEffect(() => {
-    if (foto) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImage(reader.result);
-      };
-      reader.readAsDataURL(foto);
-    }
-  }, [foto]);
-
   return (
     <Card sx={{ maxWidth: 345 }} className="card-container">
       <CardHeader
@@ -71,7 +60,7 @@ export default function PetCard({
           </div>
         }
       />
-      {image && (
+      {foto && (
         <CardMedia
           component="img"
           height="194"
