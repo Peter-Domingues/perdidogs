@@ -8,15 +8,46 @@ import ListItemText from "@mui/material/ListItemText";
 import Link from "next/link";
 
 const Instas = () => {
-  const instaList = [
+  const firstInstaList = [
     { name: "acheseupetrs", link: "https://www.instagram.com/acheseupetrs/" },
     {
-      name: "dogs_enchenters",
-      link: "https://www.instagram.com/dogs_enchenters/",
+      name: "pontalanimais",
+      link: "https://www.instagram.com/pontalanimais/",
     },
     {
-      name: "animaisresgatadosrs",
-      link: "https://www.instagram.com/animaisresgatadosrs/",
+      name: "resgatadosdasilhas",
+      link: "https://www.instagram.com/resgatadosdasilhas/",
+    },
+    {
+      name: "adote01miau",
+      link: "https://www.instagram.com/adote01miau/",
+    },
+    {
+      name: "animaisresgatadossarandi",
+      link: "https://www.instagram.com/animaisresgatadossarandi/",
+    },
+  ];
+
+  const lastInstaList = [
+    {
+      name: "resgatados.enchente.rs",
+      link: "https://www.instagram.com/resgatados.enchente.rs/",
+    },
+    {
+      name: "resgatados_ipa",
+      link: "https://www.instagram.com/resgatados_ipa/",
+    },
+    {
+      name: "sosanimaisdailha",
+      link: "https://www.instagram.com/sosanimaisdailha/",
+    },
+    {
+      name: "animaisresgatadosmathias",
+      link: "https://www.instagram.com/animaisresgatadosmathias/",
+    },
+    {
+      name: "acheseudogulbra",
+      link: "https://www.instagram.com/acheseudogulbra/",
     },
   ];
 
@@ -31,7 +62,7 @@ const Instas = () => {
         <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
           <nav aria-label="main mailbox folders">
             <List>
-              {instaList.map((item) => (
+              {firstInstaList.map((item) => (
                 <Link href={item.link} target="_blank">
                   <ListItem disablePadding>
                     <ListItemButton>
@@ -47,7 +78,7 @@ const Instas = () => {
         <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
           <nav aria-label="main mailbox folders">
             <List>
-              {instaList.map((item) => (
+              {lastInstaList.map((item) => (
                 <Link href={item.link} target="_blank">
                   <ListItem disablePadding>
                     <ListItemButton>
