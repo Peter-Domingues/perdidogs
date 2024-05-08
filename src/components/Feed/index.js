@@ -1,32 +1,11 @@
 import PetCard from "../PetCard";
 import { Pagination } from "@mui/material";
-import { getInundogs } from "../../api/apiService";
-import { useEffect, useState, useCallback } from "react";
 
-const Feed = () => {
-  const [data, setData] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const handleChangePage = (e, value) => {
-    setCurrentPage(value);
-  };
-
-  console.log(currentPage);
-
-  const getDogs = useCallback(
-    (currentPage) =>
-      getInundogs({ page: currentPage }).then((res) => setData(res)),
-    [getInundogs]
-  );
-
-  useEffect(() => {
-    getDogs(currentPage);
-  }, [currentPage]);
-
+const Feed = ({ data, handleChangePage }) => {
   return (
     <div className="feed-container">
       {data &&
-        data.inundogs.map((pet) => (
+        data?.inundogs?.map((pet) => (
           <PetCard
             especie={pet.especie}
             sexo={pet.sexo}

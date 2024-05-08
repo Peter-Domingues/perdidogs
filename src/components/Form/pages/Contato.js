@@ -16,20 +16,6 @@ const Contato = () => {
   const [nomeResponsavelError, setNomeResponsavelError] = useState(false);
   const [telefoneError, setTelefoneError] = useState(false);
 
-  const especie = useSelector((state) => state.form.especie);
-  const sexo = useSelector((state) => state.form.sexo);
-  const raca = useSelector((state) => state.form.raca);
-  const porte = useSelector((state) => state.form.porte);
-  const cidade = useSelector((state) => state.form.cidade);
-  const endereco = useSelector((state) => state.form.endereco);
-  const obs = useSelector((state) => state.form.observacao);
-  const cor = useSelector((state) => state.form.cor);
-  const comportamento = useSelector((state) => state.form.comportamento);
-  const faixaEtaria = useSelector((state) => state.form.faixaEtaria);
-  const saude = useSelector((state) => state.form.saude);
-  const castrado = useSelector((state) => state.form.castrado);
-  const contato = useSelector((state) => state.form.contato);
-
   const onChangeNomeResponsavel = (e) => {
     setNomeResponsavel(e.target.value);
     setNomeResponsavelError(false);
@@ -39,26 +25,6 @@ const Contato = () => {
     setTelefone(e.target.value);
     setTelefoneError(false);
   };
-
-  const createDog = useCallback(
-    () =>
-      createInundog({
-        especie,
-        sexo,
-        raca,
-        porte,
-        cidade,
-        endereco,
-        observacao: obs,
-        cor,
-        comportamento,
-        faixaEtaria,
-        saude,
-        castrado,
-        contato,
-      }).then((res) => console.log(res)),
-    [createInundog]
-  );
 
   const handleSend = () => {
     if (nomeResponsavel.trim() === "") {
@@ -77,8 +43,6 @@ const Contato = () => {
     );
 
     dispatch(increment());
-
-    //createDog();
   };
 
   return (
