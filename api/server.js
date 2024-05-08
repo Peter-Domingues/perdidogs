@@ -65,7 +65,7 @@ app.delete("/api/inundog/:id", (req, res) => {
     .then((data) => res.json(data));
 });
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send(`<h1>Welcome to Inundogs</h1>`);
 });
 
