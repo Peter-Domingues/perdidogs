@@ -1,15 +1,16 @@
 "use client";
-import Form from "@/components/Form";
-import HomePage from "@/components/Home";
+
 import { Provider } from "react-redux";
 import store from "../store";
+import HomePage from "@/components/Home";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
     <Provider store={store}>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <main className="flex min-h-screen flex-col items-center">
         <HomePage />
-        <Form />
+        <Footer />
       </main>
     </Provider>
   );
