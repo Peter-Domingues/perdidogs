@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: `https://www.perdidogs.com.br`,
+  // baseURL: `https://www.perdidogs.com.br`,
+  baseURL: process.env.API_BASE_URL,
 });
 
 export const uploadImage = async (file) => {

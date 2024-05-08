@@ -1,19 +1,26 @@
 const express = require("express");
 const multer = require("multer");
-const path = require("path");
+const multerS3 = require("multer-s3");
+const aws = require("aws-sdk");
 
 const inundogsController = require("./controllers/inundogs.controller");
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/images/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
+const s3 = new aws.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: "us-east-2",
+})
 
-const upload = multer({ storage: storage });
+const upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: "perdidogs-bucket",
+        acl: "public-read",
+        key: function (req, file, cb) {
+            cb(null, Date.now().toString() + "-" + file.originalname);
+        }
+    })
+});
 
 const router = express.Router();
 
@@ -22,7 +29,7 @@ router.post("/upload", upload.single("image"), (req, res) => {
     return res.status(400).send("Nenhum arquivo enviado.");
   }
 
-  res.send(`images/${req.file.path.split("\\")[2]}`);
+  res.send(req.file.location);
 });
 
 router.get("/inundogs", (req, res) => {
