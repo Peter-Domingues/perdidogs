@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com`,
+  baseURL: `https://www.perdidogs.com.br`,
 });
 
 export const uploadImage = async (file) => {
