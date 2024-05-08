@@ -7,6 +7,7 @@ const next = require("next");
 require("dotenv").config();
 
 const inundogsController = require("./controllers/inundogs.controller");
+const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 
