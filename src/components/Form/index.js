@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import Especie from "./pages/Especie";
 import Sexo from "./pages/Sexo";
 import Raca from "./pages/Raca";
@@ -8,7 +7,7 @@ import Porte from "./pages/Porte";
 import Endereco from "./pages/Endereco";
 import Foto from "./pages/Foto";
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment } from "@/store/reducers/pageReducer";
+import { decrement, increment, setCounter } from "@/store/reducers/pageReducer";
 import Cidade from "./pages/Cidade";
 import Observacao from "./pages/Observacao";
 import FaixaEtaria from "./pages/FaixaEtaria";
@@ -20,11 +19,17 @@ import Contato from "./pages/Contato";
 import { NextButton } from "./pages/pages.styles";
 import { ArrowBack, ArrowForward, Close } from "@mui/icons-material";
 import Resumo from "./pages/Resumo";
+import { IconButton } from "@mui/material";
+import { clearStates } from "@/store/reducers/formReducer";
+import { useRouter } from "next/navigation";
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
 
 const Form = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const counter = useSelector((state) => state.counter.value);
-  const especie = useSelector((state) => state.form.especie);
+  const formAnswers = useSelector((state) => state.form);
 
   const pages = [
     { title: "Qual a espécie?", component: <Especie /> },
@@ -56,12 +61,53 @@ const Form = () => {
   const [disableBack, setDisableBack] = useState(false);
   const isLastPage = counter + 1 == pages.length;
 
+  const canSkipPage = (pageCount) => {
+    switch (pageCount) {
+      case 0:
+        if (formAnswers.especie == "") return false;
+        return true;
+      case 1:
+        if (formAnswers.sexo == "") return false;
+        return true;
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+      case 6:
+      case 7:
+      case 8:
+      case 11:
+        return true;
+      case 9:
+        if (formAnswers.cidade == "") return false;
+        return true;
+      case 10:
+        if (formAnswers.endereco == "") return false;
+        return true;
+      case 12:
+        if (formAnswers.foto == null) return false;
+        return true;
+      case 13:
+        if (formAnswers.contato.responsavel == "") return false;
+        return true;
+
+      default:
+        return true; // Allow skipping other pages by default
+    }
+  };
+
   useEffect(() => {
-    if (counter == 0) {
+    const canSkip = canSkipPage(counter);
+
+    if (!canSkip) {
       setDisableNext(true);
-      setDisableBack(true);
+      if (counter == 0) {
+        return setDisableBack(true);
+      }
+      setDisableBack(false);
       return;
     }
+
     if (counter + 1 >= pages.length) {
       setDisableNext(false);
       setDisableBack(false);
@@ -76,44 +122,42 @@ const Form = () => {
 
   const handleNext = () => {
     if (counter + 1 < pages.length) {
-      if (counter == 1 && especie == "gato") {
-        dispatch(increment());
-        dispatch(increment());
+      if (counter == 1 && formAnswers.especie == "Gato") {
+        return dispatch(setCounter(4));
       }
       dispatch(increment());
     }
   };
 
-  const handleFinish = () => {
-    if (counter + 1 < pages.length) {
-      if (counter == 1 && especie == "gato") {
-        dispatch(increment());
-        dispatch(increment());
-      }
-      dispatch(increment());
-    }
-  };
+  const handleFinish = () => {};
 
   const handleBack = () => {
     if (counter - 1 >= 0) {
-      if (counter == 4 && especie == "gato") {
-        dispatch(decrement());
-        dispatch(decrement());
+      if (counter == 4 && formAnswers.especie == "Gato") {
+        return dispatch(setCounter(1));
       }
       dispatch(decrement());
     }
   };
 
+  const handleCancel = () => {
+    router.push("/");
+    dispatch(setCounter(0));
+    dispatch(clearStates());
+  };
+
   return (
-    <div>
+    <div className="form-page">
       <div className="title-and-close">
         <h1 className="title">Você está adicionando um novo Resgatado</h1>{" "}
-        <Link href="/">
+        <IconButton onClick={handleCancel}>
           <Close className="icon-close" />
-        </Link>
+        </IconButton>
       </div>
-      <h1 className="form-title">{pages[counter].title}</h1>
-      {pages[counter].component}
+      <div className="title-and-content">
+        <h1 className="form-title">{pages[counter].title}</h1>
+        {pages[counter].component}
+      </div>
 
       <div className="form-buttons-div">
         <NextButton disabled={disableBack} onClick={handleBack}>

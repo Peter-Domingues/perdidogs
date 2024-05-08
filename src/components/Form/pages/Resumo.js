@@ -41,14 +41,6 @@ const Resumo = () => {
     { title: "Observação:", info: observacao },
   ];
 
-  useEffect(() => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImage(reader.result);
-    };
-    reader.readAsDataURL(foto);
-  }, [foto]);
-
   return (
     <div>
       <div className="resumo-div">
@@ -63,9 +55,9 @@ const Resumo = () => {
               );
           })}
         </div>
-        {image && (
+        {foto && (
           <img
-            src={image}
+            src={foto}
             alt="Preview"
             style={{ maxWidth: "200px", maxHeight: "200px" }}
           />

@@ -1,14 +1,16 @@
 import { changeContato } from "@/store/reducers/formReducer";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import InputMask from "react-input-mask";
 import { StyledTextField, SendButton } from "./pages.styles";
 import { increment } from "@/store/reducers/pageReducer";
 
 const Contato = () => {
   const dispatch = useDispatch();
-  const [nomeResponsavel, setNomeResponsavel] = useState("");
-  const [telefone, setTelefone] = useState("");
+  const contato = useSelector((state) => state.form.contato);
+
+  const [nomeResponsavel, setNomeResponsavel] = useState(contato.responsavel);
+  const [telefone, setTelefone] = useState(contato.telefone);
   const [nomeResponsavelError, setNomeResponsavelError] = useState(false);
   const [telefoneError, setTelefoneError] = useState(false);
 
@@ -57,6 +59,7 @@ const Contato = () => {
         {() => (
           <StyledTextField
             label="Telefone:"
+            value={telefone}
             error={telefoneError}
             className="space-top"
             helperText={

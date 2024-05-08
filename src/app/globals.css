@@ -6,7 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  --dark-green: #6dc4bf;
+  --dark-green: #49281f;
   --blue-green: #6d9fbf;
 }
 
@@ -26,9 +26,13 @@ body {
     text-wrap: balance;
   }
 }
+.subtitle {
+  padding: 0 20px;
+  text-align: center;
+}
 
 .image-upload {
-  background-color: #6dc4bf;
+  background-color: #49281f;
   margin: 20px;
   cursor: pointer;
   color: white;
@@ -54,6 +58,13 @@ body {
   margin-top: 20px;
 }
 
+@media only screen and (max-width: 900px) {
+  .title {
+    font-size: 20px;
+    text-align: center;
+  }
+}
+
 /* ------------ Home Styles ------------ */
 .home-title-div {
   width: 100%;
@@ -61,6 +72,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding-top: 5%;
+  background-color: #ffe4b3;
 }
 .home-title {
   font-size: 30px;
@@ -74,7 +86,7 @@ body {
 
 /* ------------ Footer Styles ------------ */
 .footer-container {
-  background-color: #6dc4bf;
+  background-color: #49281f;
   height: 150px;
   width: 100%;
 }
@@ -86,6 +98,7 @@ body {
   flex-wrap: wrap;
   padding: 5%;
   justify-content: space-evenly;
+  background-color: white;
 }
 
 .card-info {
@@ -107,7 +120,6 @@ body {
 
 /* ------------ SerchBar Styles ------------ */
 .search-container {
-  background-color: var(--dark-green);
   width: 100%;
   height: 80px;
   margin-top: 1%;
@@ -116,11 +128,29 @@ body {
   justify-content: center;
   flex-wrap: wrap;
 }
+.search-container-mobile {
+  display: none;
+}
 
+@media only screen and (max-width: 900px) {
+  .search-container {
+    display: none;
+  }
+  .search-container-mobile {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dark-green);
+    width: 100%;
+    align-items: center;
+    padding: 20px 0;
+    margin: 20px 0;
+  }
+}
 /* ------------ Form Styles ------------ */
 .form-page {
   width: 100%;
-  max-height: 100vw;
+  height: 100vh;
+  max-height: 100vh;
   transform-origin: center;
   display: flex;
   justify-content: center;
@@ -133,6 +163,7 @@ body {
   text-align: center;
   margin-top: 10%;
   margin-bottom: 20px;
+  background-color: #ffe4b3;
 }
 
 .form-buttons-div {
@@ -140,6 +171,7 @@ body {
   justify-content: space-between;
   display: flex;
   padding-top: 20px;
+  align-self: flex-end;
 }
 
 .form-questions-buttons-div {
@@ -185,8 +217,9 @@ body {
   display: flex;
   margin: 10% 0;
   width: 100%;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  align-self: flex-start;
 }
 
 .icon-close {
@@ -194,7 +227,27 @@ body {
   font-size: 30px;
   color: red;
 }
+.title-and-content {
+  align-self: flex-start;
+}
 
+@media only screen and (max-width: 900px) {
+  .resumo-div {
+    flex-direction: column-reverse;
+  }
+
+  .title-and-close {
+    padding: 20px;
+    margin: 0;
+  }
+  .form-buttons-div {
+    padding: 20px;
+  }
+  .button-mobile {
+    height: 70px;
+    width: 200px;
+  }
+}
 /* ------------ Instas Styles ------------ */
 .instas-container {
   display: flex;
@@ -206,4 +259,5 @@ body {
 .insta-lists {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }

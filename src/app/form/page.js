@@ -7,9 +7,7 @@ import store from "@/store";
 const FormPage = () => {
   return (
     <Provider store={store}>
-      <div className="form-page">
-        <Form />
-      </div>
+      <Form />
     </Provider>
   );
 };

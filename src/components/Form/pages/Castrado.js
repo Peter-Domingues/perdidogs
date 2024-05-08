@@ -14,13 +14,22 @@ const Castrado = () => {
 
   return (
     <div className="form-questions-buttons-div">
-      <StyledButton variant="contained" onClick={() => onChangeCastrado("Sim")}>
+      <StyledButton
+        className="button-mobile"
+        variant="contained"
+        onClick={() => onChangeCastrado("Sim")}
+      >
         Sim
       </StyledButton>
-      <StyledButton variant="contained" onClick={() => onChangeCastrado("Não")}>
+      <StyledButton
+        className="button-mobile"
+        variant="contained"
+        onClick={() => onChangeCastrado("Não")}
+      >
         Não
       </StyledButton>
       <StyledButton
+        className="button-mobile"
         variant="contained"
         onClick={() => onChangeCastrado("Não sei")}
       >
