@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: process.env.API_BASE_URL,
+  baseURL: `http://${process.env.HOST}:${process.env.PORT}`,
 });
 
 export const uploadImage = async (file) => {
@@ -9,7 +9,7 @@ export const uploadImage = async (file) => {
   formData.append("image", file);
 
   try {
-    const response = await apiClient.post("/upload", formData, {
+    const response = await apiClient.post("/api/upload", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -24,7 +24,7 @@ export const uploadImage = async (file) => {
 export const getInundogs = async (params) => {
   console.log(params);
   try {
-    const response = await apiClient.get("/inundogs", { ...{ params } });
+    const response = await apiClient.get("/api/inundogs", { ...{ params } });
     return response.data;
   } catch (error) {
     console.error("Error while fetching inundogs:", error);
@@ -35,7 +35,7 @@ export const getInundogs = async (params) => {
 export const createInundog = async (inundogData) => {
   try {
     console.log({ inundogData });
-    const response = await apiClient.post("/inundog", inundogData);
+    const response = await apiClient.post("/api/inundog", inundogData);
     return response.data;
   } catch (error) {
     console.error("Error while creating inundog:", error);
@@ -45,7 +45,7 @@ export const createInundog = async (inundogData) => {
 
 export const updateInundog = async (inundogId, inundogData) => {
   try {
-    const response = await apiClient.put(`/inundog/${inundogId}`, inundogData);
+    const response = await apiClient.put(`/api/inundog/${inundogId}`, inundogData);
     return response.data;
   } catch (error) {
     console.error(`Error while updating inundog with ID ${inundogId}:`, error);
@@ -55,7 +55,7 @@ export const updateInundog = async (inundogId, inundogData) => {
 
 export const deleteInundog = async (inundogId) => {
   try {
-    const response = await apiClient.delete(`/inundog/${inundogId}`);
+    const response = await apiClient.delete(`/api/inundog/${inundogId}`);
     return response.data;
   } catch (error) {
     console.error(`Error while deleting inundog with ID ${inundogId}:`, error);
