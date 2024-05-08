@@ -63,7 +63,7 @@ export default function PetCard({
       {foto && (
         <CardMedia
           component="img"
-          height="194"
+          sx={{ height: 200 }}
           image={foto}
           alt="Paella dish"
         />

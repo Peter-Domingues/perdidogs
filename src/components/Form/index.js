@@ -21,7 +21,7 @@ import Contato from "./pages/Contato";
 import { NextButton } from "./pages/pages.styles";
 import { ArrowBack, ArrowForward, Close } from "@mui/icons-material";
 import Resumo from "./pages/Resumo";
-import { IconButton } from "@mui/material";
+import { IconButton, Snackbar } from "@mui/material";
 import { clearStates } from "@/store/reducers/formReducer";
 import { useRouter } from "next/navigation";
 import Alert from "@mui/material/Alert";
@@ -61,15 +61,17 @@ const Form = () => {
   ];
   const [disableNext, setDisableNext] = useState(false);
   const [disableBack, setDisableBack] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const isLastPage = counter + 1 == pages.length;
 
   const canSkipPage = (pageCount) => {
     switch (pageCount) {
       case 0:
-        if (formAnswers.especie == "") return false;
+        if (form.especie == "") return false;
         return true;
       case 1:
-        if (formAnswers.sexo == "") return false;
+        if (form.sexo == "") return false;
         return true;
       case 2:
       case 3:
@@ -81,16 +83,16 @@ const Form = () => {
       case 11:
         return true;
       case 9:
-        if (formAnswers.cidade == "") return false;
+        if (form.cidade == "") return false;
         return true;
       case 10:
-        if (formAnswers.endereco == "") return false;
+        if (form.endereco == "") return false;
         return true;
       case 12:
-        if (formAnswers.foto == null) return false;
+        if (form.foto == null) return false;
         return true;
       case 13:
-        if (formAnswers.contato.responsavel == "") return false;
+        if (form.contato.responsavel == "") return false;
         return true;
 
       default:
@@ -142,21 +144,26 @@ const Form = () => {
           porte: form.porte,
           cidade: form.cidade,
           endereco: form.endereco,
-          observacao: form.obs,
+          observacao: form.observacao,
           cor: form.cor,
           comportamento: form.comportamento,
           faixaEtaria: form.faixaEtaria,
           saude: form.saude,
           castrado: form.castrado,
           contato: form.contato,
-        }).then((res) => console.log(res))
+        }).then((res) => setOpen(true))
       )[(uploadImage, createInundog)]
   );
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
   const handleFinish = () => {
-    console.log(form.foto);
-
     createDog();
+    handleCancel();
   };
 
   const handleBack = () => {
@@ -186,7 +193,6 @@ const Form = () => {
         <h1 className="form-title">{pages[counter].title}</h1>
         {pages[counter].component}
       </div>
-
       <div className="form-buttons-div">
         <NextButton disabled={disableBack} onClick={handleBack}>
           <ArrowBack />
@@ -204,6 +210,12 @@ const Form = () => {
             </>
           )}
         </NextButton>
+
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success">
+            Cadastrado com sucesso!
+          </Alert>
+        </Snackbar>
       </div>
     </div>
   );

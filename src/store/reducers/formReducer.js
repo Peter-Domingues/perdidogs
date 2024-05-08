@@ -17,6 +17,7 @@ const initialState = {
     telefone: "",
   },
   foto: null,
+  imageTemp: null,
 };
 
 const formSlice = createSlice({
@@ -66,6 +67,9 @@ const formSlice = createSlice({
     changeFoto: (state, action) => {
       state.foto = action.payload;
     },
+    changeImageTemp: (state, action) => {
+      state.imageTemp = action.payload;
+    },
     clearStates: () => initialState,
   },
 });
@@ -85,6 +89,7 @@ export const {
   changeCor,
   changeContato,
   changeFoto,
+  changeImageTemp,
   clearStates,
 } = formSlice.actions;
 export default formSlice.reducer;

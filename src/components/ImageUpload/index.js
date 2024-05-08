@@ -1,24 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useDispatch, useSelector } from "react-redux";
-import { changeFoto } from "@/store/reducers/formReducer";
+import { changeFoto, changeImageTemp } from "@/store/reducers/formReducer";
 
 const ImageUpload = () => {
   const dispatch = useDispatch();
-  const foto = useSelector((state) => state.form.foto);
-  const [image, setImage] = useState(foto);
+  const imageTemp = useSelector((state) => state.form.imageTemp);
+  const [image, setImage] = useState(imageTemp);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-<<<<<<< HEAD
         dispatch(changeFoto(file));
+        dispatch(changeImageTemp(reader.result));
 
-=======
-        dispatch(changeFoto(reader.result));
->>>>>>> 7da1ffc6dca94560ecdaf1bd35c114a4fba59b2b
         setImage(reader.result);
       };
       reader.readAsDataURL(file);

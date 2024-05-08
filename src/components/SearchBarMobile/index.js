@@ -5,7 +5,7 @@ import {
   SearchMobileButton,
 } from "./searchBarMobile.styles";
 
-const SearchBarMobile = () => {
+const SearchBarMobile = ({ handleChangeFilters, handleSearch }) => {
   const especieOptions = ["Cachorro", "Gato"];
   const sexoOptions = ["Macho", "Fêmea"];
   const porteOptions = ["P", "M", "G"];
@@ -13,6 +13,8 @@ const SearchBarMobile = () => {
   return (
     <div className="search-container-mobile">
       <StyledAutoComplete
+        className="search-input"
+        onChange={handleChangeFilters("cidade")}
         disablePortal
         id="combo-box-demo"
         options={cidades}
@@ -20,6 +22,7 @@ const SearchBarMobile = () => {
         renderInput={(params) => <TextField {...params} label="Cidade" />}
       />
       <StyledAutoComplete
+        onChange={handleChangeFilters("especie")}
         className="space-top"
         disablePortal
         id="combo-box-demo"
@@ -28,6 +31,7 @@ const SearchBarMobile = () => {
         renderInput={(params) => <TextField {...params} label="Espécie" />}
       />
       <StyledAutoComplete
+        onChange={handleChangeFilters("sexo")}
         className="space-top"
         disablePortal
         id="combo-box-demo"
@@ -36,6 +40,7 @@ const SearchBarMobile = () => {
         renderInput={(params) => <TextField {...params} label="Sexo" />}
       />
       <StyledAutoComplete
+        onChange={handleChangeFilters("porte")}
         className="space-top"
         disablePortal
         id="combo-box-demo"
@@ -44,6 +49,7 @@ const SearchBarMobile = () => {
         renderInput={(params) => <TextField {...params} label="Porte" />}
       />
       <StyledAutoComplete
+        onChange={handleChangeFilters("raca")}
         className="space-top"
         disablePortal
         id="combo-box-demo"
@@ -51,7 +57,9 @@ const SearchBarMobile = () => {
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Raças" />}
       />
-      <SearchMobileButton className="space-top">Buscar</SearchMobileButton>
+      <SearchMobileButton onClick={handleSearch} className="space-top">
+        Buscar
+      </SearchMobileButton>
     </div>
   );
 };

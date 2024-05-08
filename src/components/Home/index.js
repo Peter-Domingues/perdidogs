@@ -19,7 +19,9 @@ const HomePage = () => {
 
   const getDogs = useCallback(
     (currentPage, filters) =>
-      getInundogs({ page: currentPage, filters }).then((res) => setData(res)),
+      getInundogs({ page: currentPage, ...filters }).then((res) =>
+        setData(res)
+      ),
     [getInundogs]
   );
 
@@ -58,13 +60,15 @@ const HomePage = () => {
         </Link>
       </div>
 
-      <SearchBar handleChangeFilters={handleChangeFilters} filters={filters} />
-      <SearchBarMobile />
-      <Feed
-        data={data}
-        handleChangePage={handleChangePage}
+      <SearchBar
+        handleChangeFilters={handleChangeFilters}
         handleSearch={handleSearch}
       />
+      <SearchBarMobile
+        handleChangeFilters={handleChangeFilters}
+        handleSearch={handleSearch}
+      />
+      <Feed data={data} handleChangePage={handleChangePage} />
       <Divider style={{ width: "80%" }} />
       <Instas />
     </div>

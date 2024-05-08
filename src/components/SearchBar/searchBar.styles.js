@@ -17,13 +17,13 @@ export const SearchButton = styled(Button)`
 
 export const StyledAutoComplete = styled(Autocomplete)`
   background-color: white;
-  width: 100%
+
   margin-right: 10px;
   & label.Mui-focused {
     color: black;
   }
   & .MuiInput-underline:after {
-    border-bottom-color: #49281F;
+    border-bottom-color: #49281f;
   }
   & .MuiOutlinedInput-root {
     &:hover fieldset {
