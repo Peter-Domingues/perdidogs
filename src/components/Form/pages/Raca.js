@@ -1,9 +1,10 @@
 "use client";
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
 import { useDispatch } from "react-redux";
 import { changeRaca } from "@/store/reducers/formReducer";
 import { increment } from "@/store/reducers/pageReducer";
+import { StyledAutoComplete } from "./pages.styles";
+import { racas } from "@/data/options";
 
 const Raca = () => {
   const dispatch = useDispatch();
@@ -13,64 +14,9 @@ const Raca = () => {
     dispatch(increment());
   };
 
-  const racas = [
-    "SRD",
-    "Labrador Retriever",
-    "Pastor Alemão",
-    "Golden Retriever",
-    "Bulldog Francês",
-    "Bulldog Inglês",
-    "Beagle",
-    "Poodle (Toy, Miniatura, Padrão)",
-    "Boxer",
-    "Dachshund (Teckel, Salsicha)",
-    "Yorkshire Terrier",
-    "Chihuahua",
-    "Husky Siberiano",
-    "Rottweiler",
-    "Shih Tzu",
-    "Pug",
-    "Doberman Pinscher",
-    "Border Collie",
-    "Australian Shepherd",
-    "Cocker Spaniel",
-    "Maltese",
-    "Dálmata",
-    "Bichon Frisé",
-    "Jack Russell Terrier",
-    "Bull Terrier",
-    "Basset Hound",
-    "Schnauzer (Miniatura, Standard, Gigante)",
-    "Pomerânia",
-    "Dogue Alemão",
-    "Bernese Mountain Dog",
-    "Mastiff",
-    "São Bernardo",
-    "Akita Inu",
-    "Cavalier King Charles Spaniel",
-    "West Highland White Terrier",
-    "Shar-Pei",
-    "Staffordshire Bull Terrier",
-    "Rhodesian Ridgeback",
-    "Great Dane",
-    "Scottish Terrier",
-    "Lhasa Apso",
-    "Shetland Sheepdog",
-    "Papillon",
-    "Collie (Rough e Smooth)",
-    "Setter Irlandês",
-    "Weimaraner",
-    "Whippet",
-    "Alaskan Malamute",
-    "Chow Chow",
-    "Havanese",
-    "Border Terrier",
-  ];
-
   return (
-    <div>
-      <h1>Qual a raça?</h1>
-      <Autocomplete
+    <div className="form-questions-buttons-div space-top">
+      <StyledAutoComplete
         disablePortal
         id="combo-box-demo"
         options={racas}

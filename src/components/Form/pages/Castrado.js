@@ -1,18 +1,8 @@
 "use client";
 import { changeCastrado } from "@/store/reducers/formReducer";
 import { increment } from "@/store/reducers/pageReducer";
-import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
-
-const StyledButton = styled(Button)`
-  background-color: #6dc4bf;
-  padding: 50px;
-  margin: 20px;
-  &:hover {
-    background-color: #6dc4bf96;
-  }
-`;
+import { StyledButton } from "./pages.styles";
 
 const Castrado = () => {
   const dispatch = useDispatch();
@@ -23,7 +13,7 @@ const Castrado = () => {
   };
 
   return (
-    <div>
+    <div className="form-questions-buttons-div">
       <StyledButton variant="contained" onClick={() => onChangeCastrado("Sim")}>
         Sim
       </StyledButton>

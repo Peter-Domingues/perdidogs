@@ -1,8 +1,9 @@
 import { changeContato } from "@/store/reducers/formReducer";
-import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import InputMask from "react-input-mask";
+import { StyledTextField, SendButton } from "./pages.styles";
+import { increment } from "@/store/reducers/pageReducer";
 
 const Contato = () => {
   const dispatch = useDispatch();
@@ -23,13 +24,12 @@ const Contato = () => {
 
   const handleSend = () => {
     if (nomeResponsavel.trim() === "") {
-      setNomeResponsavelError(true);
+      return setNomeResponsavelError(true);
     }
     if (telefone.trim() === "") {
-      setTelefoneError(true);
+      return setTelefoneError(true);
     }
 
-    // If any field is empty, do not proceed
     if (nomeResponsavel.trim() === "" || telefone.trim() === "") {
       return;
     }
@@ -37,11 +37,12 @@ const Contato = () => {
     dispatch(
       changeContato({ responsavel: nomeResponsavel, telefone: telefone })
     );
+    dispatch(increment());
   };
 
   return (
-    <div>
-      <TextField
+    <div className="form-contact-div space-top">
+      <StyledTextField
         label="Nome do responsável"
         value={nomeResponsavel}
         onChange={onChangeNomeResponsavel}
@@ -54,9 +55,10 @@ const Contato = () => {
         onChange={onChangeTelefone}
       >
         {() => (
-          <TextField
+          <StyledTextField
             label="Telefone:"
             error={telefoneError}
+            className="space-top"
             helperText={
               telefoneError
                 ? "Este campo é obrigatório"
@@ -65,7 +67,12 @@ const Contato = () => {
           />
         )}
       </InputMask>
-      <Button onClick={handleSend}> Enviar</Button>
+      <SendButton
+        style={{ marginLeft: 0, marginTop: "10px" }}
+        onClick={handleSend}
+      >
+        Enviar
+      </SendButton>
     </div>
   );
 };

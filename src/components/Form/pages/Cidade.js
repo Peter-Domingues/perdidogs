@@ -1,9 +1,11 @@
 "use client";
 
+import { cidades } from "@/data/options";
 import { changeCidade } from "@/store/reducers/formReducer";
 import { increment } from "@/store/reducers/pageReducer";
-import { Autocomplete, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useDispatch } from "react-redux";
+import { StyledAutoComplete } from "./pages.styles";
 
 const Cidade = () => {
   const dispatch = useDispatch();
@@ -13,22 +15,9 @@ const Cidade = () => {
     dispatch(increment());
   };
 
-  const cidades = [
-    "Alvorada",
-    "Cachoeirinha",
-    "Canoas",
-    "Eldorado do Sul",
-    "Gravataí",
-    "Guaíba",
-    "Novo Hamburgo",
-    "Porto Alegre",
-    "São Leopoldo",
-    "Viamão",
-  ];
-
   return (
-    <div>
-      <Autocomplete
+    <div className="form-questions-buttons-div space-top">
+      <StyledAutoComplete
         disablePortal
         id="combo-box-demo"
         options={cidades}

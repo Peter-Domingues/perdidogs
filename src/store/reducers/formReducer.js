@@ -19,6 +19,7 @@ const formSlice = createSlice({
       responsavel: "",
       telefone: "",
     },
+    foto: null,
   },
 
   reducers: {
@@ -61,6 +62,9 @@ const formSlice = createSlice({
     changeContato: (state, action) => {
       state.contato = action.payload;
     },
+    changeFoto: (state, action) => {
+      state.foto = action.payload;
+    },
   },
 });
 
@@ -78,5 +82,6 @@ export const {
   changeFaixaEtaria,
   changeCor,
   changeContato,
+  changeFoto,
 } = formSlice.actions;
 export default formSlice.reducer;
