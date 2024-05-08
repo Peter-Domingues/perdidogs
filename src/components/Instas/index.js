@@ -23,7 +23,7 @@ const Instas = () => {
   return (
     <div className="instas-container">
       <h1 className="title">Não achou seu pet aqui?</h1>
-      <h1 className="space-top">
+      <h1 className="space-top subtitle">
         Confira também os perfis que estão compartilhando fotos e informações
         dos animais resgatados:
       </h1>

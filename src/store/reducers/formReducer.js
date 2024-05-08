@@ -1,26 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
+const initialState = {
+  especie: "",
+  sexo: "",
+  porte: "",
+  raca: "",
+  cidade: "",
+  endereco: "",
+  observacao: "",
+  comportamento: "",
+  castrado: "",
+  saudavel: "",
+  faixaEtaria: "",
+  cor: "",
+  contato: {
+    responsavel: "",
+    telefone: "",
+  },
+  foto: null,
+};
 
 const formSlice = createSlice({
   name: "form",
-  initialState: {
-    especie: "",
-    sexo: "",
-    porte: "",
-    raca: "",
-    cidade: "",
-    endereco: "",
-    observacao: "",
-    comportamento: "",
-    castrado: "",
-    saudavel: "",
-    faixaEtaria: "",
-    cor: "",
-    contato: {
-      responsavel: "",
-      telefone: "",
-    },
-    foto: null,
-  },
+  initialState,
 
   reducers: {
     changeEspecie: (state, action) => {
@@ -65,6 +66,7 @@ const formSlice = createSlice({
     changeFoto: (state, action) => {
       state.foto = action.payload;
     },
+    clearStates: () => initialState,
   },
 });
 
@@ -83,5 +85,6 @@ export const {
   changeCor,
   changeContato,
   changeFoto,
+  clearStates,
 } = formSlice.actions;
 export default formSlice.reducer;

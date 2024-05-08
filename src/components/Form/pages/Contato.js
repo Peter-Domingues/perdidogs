@@ -9,8 +9,10 @@ import { increment } from "@/store/reducers/pageReducer";
 
 const Contato = () => {
   const dispatch = useDispatch();
-  const [nomeResponsavel, setNomeResponsavel] = useState("");
-  const [telefone, setTelefone] = useState("");
+  const contato = useSelector((state) => state.form.contato);
+
+  const [nomeResponsavel, setNomeResponsavel] = useState(contato.responsavel);
+  const [telefone, setTelefone] = useState(contato.telefone);
   const [nomeResponsavelError, setNomeResponsavelError] = useState(false);
   const [telefoneError, setTelefoneError] = useState(false);
 
@@ -96,6 +98,7 @@ const Contato = () => {
         {() => (
           <StyledTextField
             label="Telefone:"
+            value={telefone}
             error={telefoneError}
             className="space-top"
             helperText={

@@ -1,10 +1,11 @@
 import { Autocomplete, Button } from "@mui/material";
 import styled from "styled-components";
 
-export const SearchButton = styled(Button)`
+export const SearchMobileButton = styled(Button)`
   background-color: #49281f;
   padding: 10px;
   font-size: 15px;
+  width: 80%;
   color: white;
   font-weight: bold;
   &:disabled {

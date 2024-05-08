@@ -4,12 +4,13 @@ import SearchBar from "../SearchBar";
 import Link from "next/link";
 import Instas from "../Instas";
 import Divider from "@mui/material/Divider";
+import SearchBarMobile from "../SearchBarMobile";
 
 const HomePage = () => {
   return (
     <div className="home-title-div">
       <h1 className="home-title">PerdiDogs & ResGatos</h1>
-      <p className="space-top">
+      <p className="space-top subtitle">
         Página dedicada para cadastrar e encontrar os pets que foram resgatados
         das enchentes do Rio Grande do Sul
       </p>
@@ -21,6 +22,7 @@ const HomePage = () => {
       </div>
 
       <SearchBar />
+      <SearchBarMobile />
       <Feed />
       <Divider style={{ width: "80%" }} />
       <Instas />

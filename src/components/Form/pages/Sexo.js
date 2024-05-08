@@ -1,7 +1,7 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import { changeSexo } from "@/store/reducers/formReducer";
-import { increment } from "@/store/reducers/pageReducer";
+import { increment, setCounter } from "@/store/reducers/pageReducer";
 import { StyledButton } from "./pages.styles";
 
 const Sexo = () => {
@@ -10,10 +10,8 @@ const Sexo = () => {
 
   const onChangeSexo = (sexo) => {
     dispatch(changeSexo(sexo));
-    if (especie == "gato") {
-      dispatch(increment());
-      dispatch(increment());
-      dispatch(increment());
+    if (especie == "Gato") {
+      dispatch(setCounter(4));
       return;
     }
     dispatch(increment());
