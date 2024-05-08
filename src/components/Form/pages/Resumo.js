@@ -67,6 +67,7 @@ const Resumo = () => {
           <img
             src={image}
             alt="Preview"
+            className="resumo-image"
             style={{ maxWidth: "200px", maxHeight: "200px" }}
           />
         )}

@@ -27,7 +27,7 @@ const filtersSlice = createSlice({
     changeFilterCidade: (state, action) => {
       state.cidade = action.payload;
     },
-    clearStates: () => initialState,
+    clearFilters: () => initialState,
   },
 });
 
@@ -37,6 +37,6 @@ export const {
   changeFilterPorte,
   changeFilterRaca,
   changeFilterCidade,
-  clearStates,
+  clearFilters,
 } = filtersSlice.actions;
 export default filtersSlice.reducer;

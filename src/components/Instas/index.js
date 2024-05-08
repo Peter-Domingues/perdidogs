@@ -59,7 +59,7 @@ const Instas = () => {
         dos animais resgatados:
       </h1>
       <div className="insta-lists space-top">
-        <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+        <Box sx={{ width: "100%", maxWidth: 360 }}>
           <nav aria-label="main mailbox folders">
             <List>
               {firstInstaList.map((item) => (
@@ -75,7 +75,7 @@ const Instas = () => {
             </List>
           </nav>
         </Box>
-        <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+        <Box sx={{ width: "100%", maxWidth: 360 }}>
           <nav aria-label="main mailbox folders">
             <List>
               {lastInstaList.map((item) => (

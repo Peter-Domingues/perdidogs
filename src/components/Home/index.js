@@ -4,14 +4,20 @@ import SearchBar from "../SearchBar";
 import Link from "next/link";
 import Instas from "../Instas";
 import Divider from "@mui/material/Divider";
-import SearchBarMobile from "../SearchBarMobile";
 import { useState, useCallback, useEffect } from "react";
 import { getInundogs } from "../../api/apiService";
+import { useDispatch } from "react-redux";
+import { clearFilters } from "@/store/reducers/filterReducer";
 
 const HomePage = () => {
+  const dispatch = useDispatch();
   const [data, setData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState(null);
+
+  const isEmpty = (obj) => {
+    return Object.keys(obj).length === 0;
+  };
 
   const handleChangePage = (e, value) => {
     setCurrentPage(value);
@@ -38,12 +44,19 @@ const HomePage = () => {
           delete updatedFilters[key];
         }
       });
+      if (isEmpty(updatedFilters)) getDogs(1);
       return updatedFilters;
     });
   };
 
   const handleSearch = () => {
     getDogs(1, filters);
+  };
+
+  const handleClearFilters = () => {
+    dispatch(clearFilters());
+    setFilters(null);
+    getDogs(1);
   };
 
   return (
@@ -54,19 +67,17 @@ const HomePage = () => {
         das enchentes do Rio Grande do Sul
       </p>
       <div className="register-button">
-        <p>Resgatou algum pet? </p>
+        <p className="title-2">Resgatou algum pet? </p>
         <Link href="/form">
           <SendButton>Cadastrar Aqui</SendButton>
         </Link>
       </div>
 
       <SearchBar
+        handleClearFilters={handleClearFilters}
         handleChangeFilters={handleChangeFilters}
         handleSearch={handleSearch}
-      />
-      <SearchBarMobile
-        handleChangeFilters={handleChangeFilters}
-        handleSearch={handleSearch}
+        filters={filters}
       />
       <Feed data={data} handleChangePage={handleChangePage} />
       <Divider style={{ width: "80%" }} />

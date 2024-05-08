@@ -42,7 +42,7 @@ const ImageUpload = () => {
         <img
           src={image}
           alt="Preview"
-          style={{ maxWidth: "300px", marginTop: "10px" }}
+          style={{ maxWidth: "300px", marginTop: "10px", marginBottom: "10px" }}
         />
       )}
     </div>

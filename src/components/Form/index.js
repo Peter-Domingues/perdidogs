@@ -168,7 +168,7 @@ const Form = () => {
 
   const handleBack = () => {
     if (counter - 1 >= 0) {
-      if (counter == 4 && form.especie == "gato") {
+      if (counter == 4 && form.especie == "Gato") {
         return dispatch(setCounter(1));
       }
       dispatch(decrement());

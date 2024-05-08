@@ -46,7 +46,7 @@ body {
 }
 
 .image-upload:hover {
-  background-color: rgba(109, 196, 191, 0.59);
+  background-color: #371e17;
 }
 
 .title {
@@ -57,11 +57,18 @@ body {
 .space-top {
   margin-top: 20px;
 }
+.title-2 {
+  font-weight: bold;
+}
 
 @media only screen and (max-width: 900px) {
   .title {
     font-size: 20px;
     text-align: center;
+  }
+
+  .subtitle {
+    font-size: 14px;
   }
 }
 
@@ -76,6 +83,7 @@ body {
 }
 .home-title {
   font-size: 30px;
+  font-weight: bold;
 }
 
 .register-button {
@@ -99,6 +107,16 @@ body {
   align-self: flex-end;
 }
 
+@media only screen and (max-width: 768px) {
+  .footer-container {
+    height: 70px;
+    padding: 10px;
+  }
+  .footer-copyright {
+    font-size: 12px;
+  }
+}
+
 /* ------------ Feed and Cards Styles ------------ */
 
 .feed-cards {
@@ -107,6 +125,7 @@ body {
   padding: 5%;
   justify-content: space-evenly;
   background-color: white;
+  max-width: 1300px;
 }
 .feed-container {
   display: flex;
@@ -114,6 +133,7 @@ body {
   background-color: white;
   padding: 5%;
   align-items: center;
+  width: 100%;
 }
 
 .card-info {
@@ -147,22 +167,34 @@ body {
   display: none;
 }
 
-.search-input {
-  margin: 5px 0;
+.search-buttons {
+  display: flex;
+  width: 10%;
 }
 
-@media only screen and (max-width: 900px) {
-  .search-container {
-    display: none;
+.clear-button {
+  color: #49281f;
+}
+
+@media only screen and (max-width: 768px) {
+  .clear-button {
+    color: white;
   }
-  .search-container-mobile {
+  .search-buttons {
+    padding-top: 20px;
+    width: 80%;
+  }
+
+  .search-container {
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
     background-color: var(--dark-green);
     width: 100%;
     align-items: center;
     padding: 20px 0;
     margin: 20px 0;
+    height: auto;
   }
 }
 /* ------------ Form Styles ------------ */
@@ -254,8 +286,16 @@ body {
 }
 
 @media only screen and (max-width: 900px) {
+  .form-title {
+    font-size: 18px;
+    padding: 0 20px;
+    margin: 2% 0;
+  }
   .resumo-div {
     flex-direction: column-reverse;
+  }
+  .resumo-image {
+    padding: 20px 0;
   }
 
   .title-and-close {
