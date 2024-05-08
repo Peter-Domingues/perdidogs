@@ -33,6 +33,8 @@ app.post("/api/upload", upload.single("image"), (req, res) => {
 });
 
 app.get("/api/inundogs", (req, res) => {
+  console.log('chegou no request');
+
   const filtro = {};
   const { page = 1, limit = 6 } = req.query;
 
