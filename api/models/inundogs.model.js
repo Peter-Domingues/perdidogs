@@ -19,6 +19,7 @@ const inundogsSchema = new mongoose.Schema({
   saude: "string",
   cor: "string",
   contato: contatoSchema,
+  createdAt: { type: Date, default: Date.now },
 });
 
 const Inundogs = mongoose.model("inundogs", inundogsSchema);

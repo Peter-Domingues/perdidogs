@@ -16,7 +16,7 @@ class InundogsRepository {
     const inundogs = await Inundogs.find(filtro)
       .limit(limit)
       .skip(startIndex)
-      .sort({ createdAt: -1 })
+      .sort({ createdAt: 1 })
       .exec();
 
     return { inundogs, totalPages, currentPage: page };
