@@ -92,6 +92,56 @@ body {
   margin-top: 3%;
 }
 
+.send-button {
+  background-color: #49281f;
+  height: 100%;
+  margin-left: 10px;
+  font-size: 15px;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+.send-button:disabled {
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  color: gray;
+}
+.send-button:hover:not([disabled]) {
+  background-color: #371e17;
+}
+
+@media (max-width: 768px) {
+  .search-button {
+    width: 80%;
+    background-color: #ffe4b3;
+    width: 80%;
+    color: #49281f;
+    &:hover {
+      color: #ffe4b3;
+    }
+    &:disabled {
+      background-color: #ffe4b3;
+    }
+  }
+  .search-button:hover {
+    color: #ffe4b3;
+  }
+  .search-button:disabled {
+    background-color: #ffe4b3;
+  }
+  .search-button {
+    width: 80%;
+    background-color: #ffe4b3;
+    width: 80%;
+    color: #49281f;
+    &:hover {
+      color: #ffe4b3;
+    }
+    &:disabled {
+      background-color: #ffe4b3;
+    }
+  }
+}
+
 /* ------------ Footer Styles ------------ */
 .footer-container {
   background-color: #49281f;
@@ -141,7 +191,7 @@ body {
 }
 
 .card-container {
-  margin-bottom: 20px;
+  margin: 10px;
 }
 
 .found-button-container {

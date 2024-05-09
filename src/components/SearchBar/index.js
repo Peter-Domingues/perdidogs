@@ -61,9 +61,13 @@ const SearchBar = ({
       />
 
       <div className="search-buttons">
-        <SearchButton disabled={!filters} onClick={handleSearch}>
+        <button
+          className="send-button search-button"
+          disabled={!filters}
+          onClick={handleSearch}
+        >
           Buscar
-        </SearchButton>
+        </button>
         <Button
           disabled={!filters}
           onClick={handleClearFilters}

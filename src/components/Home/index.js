@@ -69,7 +69,7 @@ const HomePage = () => {
       <div className="register-button">
         <p className="title-2">Resgatou algum pet? </p>
         <Link href="/form">
-          <SendButton>Cadastrar Aqui</SendButton>
+          <button className="send-button">Cadastrar Aqui</button>
         </Link>
       </div>
 

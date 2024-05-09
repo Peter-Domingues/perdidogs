@@ -144,6 +144,7 @@ const Form = () => {
           porte: form.porte,
           cidade: form.cidade,
           endereco: form.endereco,
+          faixaEtaria: form.faixaEtaria,
           observacao: form.observacao,
           cor: form.cor,
           comportamento: form.comportamento,
