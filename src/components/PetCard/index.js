@@ -57,9 +57,9 @@ export default function PetCard({
 
   const hasPorte = porte ? `de porte ${porte}, ` : "";
   const hasRaca = raca ? `da raça ${raca}, ` : "";
+  const faixaEtariaSpan = <span className="card-info">{faixaEtaria}</span>;
   const hasFaixaEtaria = faixaEtaria
-    ? ` e quem me resgatou acredita
-  que eu seja ${faixaEtaria}, `
+    ? ` e quem me resgatou acredita que eu seja `
     : "";
 
   const subject = `Informe de ${especie} encontrado`;
@@ -94,8 +94,9 @@ export default function PetCard({
           <span className="card-info">{sexo}</span>,{" "}
           <span className="card-info">{hasPorte}</span>
           <span className="card-info">{hasRaca}</span> da cor{" "}
-          <span className="card-info">{cor}</span> {hasFaixaEtaria}. Eu fui
-          encontrado na cidade <span className="card-info">{cidade}</span> e
+          <span className="card-info">{cor}</span> {hasFaixaEtaria}{" "}
+          {faixaEtaria && <span className="card-info">{faixaEtaria}</span>}. Eu
+          fui encontrado na cidade <span className="card-info">{cidade}</span> e
           atualmente eu estou aqui:{" "}
           <span className="card-info">{endereco}</span>. O nome de quem está
           responsável por mim é <span className="card-info">{responsavel}</span>{" "}

@@ -79,7 +79,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding-top: 5%;
-  background-color: #ffe4b3;
+  background-color: #f8de7e;
 }
 .home-title {
   font-size: 30px;
@@ -112,32 +112,32 @@ body {
 @media (max-width: 768px) {
   .search-button {
     width: 80%;
-    background-color: #ffe4b3;
+    background-color: #f8de7e;
     width: 80%;
     color: #49281f;
     &:hover {
-      color: #ffe4b3;
+      color: #f8de7e;
     }
     &:disabled {
-      background-color: #ffe4b3;
+      background-color: #f8de7e;
     }
   }
   .search-button:hover {
-    color: #ffe4b3;
+    color: #f8de7e;
   }
   .search-button:disabled {
-    background-color: #ffe4b3;
+    background-color: #f8de7e;
   }
   .search-button {
     width: 80%;
-    background-color: #ffe4b3;
+    background-color: #f8de7e;
     width: 80%;
     color: #49281f;
     &:hover {
-      color: #ffe4b3;
+      color: #f8de7e;
     }
     &:disabled {
-      background-color: #ffe4b3;
+      background-color: #f8de7e;
     }
   }
 }
