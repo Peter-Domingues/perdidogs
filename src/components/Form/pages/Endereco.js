@@ -5,6 +5,7 @@ import { increment } from "@/store/reducers/pageReducer";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SendButton, StyledTextField } from "./pages.styles";
+import startCase from "lodash/startCase";
 
 const Endereco = () => {
   const dispatch = useDispatch();
@@ -16,8 +17,19 @@ const Endereco = () => {
     setTempEndereco(endereco);
   };
 
+  const normalizeAddress = (address) => {
+    const trimmedAddress = address.trim();
+
+    return trimmedAddress
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  };
+
   const handleSend = () => {
-    dispatch(changeEndereco(tempEndereco));
+    const newAddress = startCase(normalizeAddress(tempEndereco));
+
+    dispatch(changeEndereco(newAddress));
     dispatch(increment());
   };
 

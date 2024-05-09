@@ -33,6 +33,16 @@ export const getInundogs = async (params) => {
   }
 };
 
+export const getEnderecoList = async () => {
+  try {
+    const response = await apiClient.get("/api/enderecos-unicos");
+    return response.data;
+  } catch (error) {
+    console.error("Error while fetching enderecos unicos:", error);
+    throw error;
+  }
+};
+
 export const createInundog = async (inundogData) => {
   try {
     console.log({ inundogData });
@@ -46,7 +56,10 @@ export const createInundog = async (inundogData) => {
 
 export const updateInundog = async (inundogId, inundogData) => {
   try {
-    const response = await apiClient.put(`/api/inundog/${inundogId}`, inundogData);
+    const response = await apiClient.put(
+      `/api/inundog/${inundogId}`,
+      inundogData
+    );
     return response.data;
   } catch (error) {
     console.error(`Error while updating inundog with ID ${inundogId}:`, error);

@@ -5,6 +5,7 @@ const initialState = {
   porte: "",
   raca: "",
   cidade: "",
+  endereco: [],
 };
 
 const filtersSlice = createSlice({
@@ -27,6 +28,9 @@ const filtersSlice = createSlice({
     changeFilterCidade: (state, action) => {
       state.cidade = action.payload;
     },
+    changeFilterEndereco: (state, action) => {
+      state.endereco = action.payload;
+    },
     clearFilters: () => initialState,
   },
 });
@@ -37,6 +41,7 @@ export const {
   changeFilterPorte,
   changeFilterRaca,
   changeFilterCidade,
+  changeFilterEndereco,
   clearFilters,
 } = filtersSlice.actions;
 export default filtersSlice.reducer;

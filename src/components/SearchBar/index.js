@@ -1,7 +1,20 @@
 import { cidades, racas } from "@/data/options";
-import { TextField, Button } from "@mui/material";
-import { StyledAutoComplete, SearchButton } from "./searchBar.styles";
-import { useEffect, useState } from "react";
+import {
+  TextField,
+  Button,
+  Autocomplete,
+  CircularProgress,
+} from "@mui/material";
+import {
+  StyledAutoComplete,
+  SearchButton,
+  StyledAutoCompleteMultiple,
+} from "./searchBar.styles";
+import { useCallback, useEffect, useState } from "react";
+import { getEnderecoList } from "@/api/apiService";
+import { useDispatch, useSelector } from "react-redux";
+import { changeEndereco } from "@/store/reducers/formReducer";
+import { changeFilterEndereco } from "@/store/reducers/filterReducer";
 
 const SearchBar = ({
   handleChangeFilters,
@@ -9,10 +22,16 @@ const SearchBar = ({
   filters,
   handleClearFilters,
 }) => {
+  const dispatch = useDispatch();
+  const enderecosSelected = useSelector((state) => state.filters.endereco);
   const especieOptions = ["Cachorro", "Gato"];
+  const [enderecoOptions, setEnderecosOptions] = useState([]);
   const sexoOptions = ["Macho", "Femea"];
   const porteOptions = ["P", "M", "G"];
   const [isDisabled, setIsDisabled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const loading = open && enderecoOptions.length === 0;
 
   useEffect(() => {
     if (filters?.especie == "Gato") {
@@ -20,6 +39,27 @@ const SearchBar = ({
     }
     return setIsDisabled(false);
   }, [filters]);
+
+  const getEnderecos = useCallback(
+    () =>
+      getEnderecoList().then((res) => {
+        let newEnderecosList = [];
+        res.map(
+          (item) => (newEnderecosList = [...newEnderecosList, item.endereco])
+        );
+        setEnderecosOptions(newEnderecosList);
+      }),
+    [getEnderecoList]
+  );
+
+  const handleOpenEndereco = () => {
+    setOpen(true);
+    getEnderecos();
+  };
+
+  const handleChangeEndereco = (e, value) => {
+    dispatch(changeFilterEndereco(value));
+  };
 
   return (
     <div className="search-container">
@@ -32,6 +72,40 @@ const SearchBar = ({
         sx={{ width: 200 }}
         renderInput={(params) => <TextField {...params} label="Cidade" />}
       />
+      {/* <StyledAutoComplete
+        multiple
+        limitTags={1}
+        defaultValue={enderecosSelected}
+        onOpen={handleOpenEndereco}
+        onClose={() => {
+          setOpen(false);
+        }}
+        onChange={handleChangeEndereco}
+        disablePortal
+        id="endereco"
+        disableCloseOnSelect
+        options={enderecoOptions}
+        loading={loading}
+        getOptionLabel={(option) => option}
+        sx={{ width: 280 }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Endereço"
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <>
+                  {loading ? (
+                    <CircularProgress color="inherit" size={20} />
+                  ) : null}
+                  {params.InputProps.endAdornment}
+                </>
+              ),
+            }}
+          />
+        )}
+      /> */}
       <StyledAutoComplete
         value={filters?.especie || ""}
         onChange={handleChangeFilters("especie")}
@@ -74,13 +148,13 @@ const SearchBar = ({
       <div className="search-buttons">
         <button
           className="send-button search-button"
-          disabled={!filters}
+          disabled={!filters && !enderecosSelected}
           onClick={handleSearch}
         >
           Buscar
         </button>
         <Button
-          disabled={!filters}
+          disabled={!filters && !enderecosSelected}
           onClick={handleClearFilters}
           className="clear-button"
         >

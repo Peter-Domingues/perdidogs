@@ -6,11 +6,15 @@ import Instas from "../Instas";
 import Divider from "@mui/material/Divider";
 import { useState, useCallback, useEffect } from "react";
 import { getInundogs } from "../../api/apiService";
-import { useDispatch } from "react-redux";
-import { clearFilters } from "@/store/reducers/filterReducer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeFilterEndereco,
+  clearFilters,
+} from "@/store/reducers/filterReducer";
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const enderecos = useSelector((state) => state.filters.endereco);
   const [data, setData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState(null);
@@ -22,11 +26,16 @@ const HomePage = () => {
   const handleChangePage = (e, value) => {
     setCurrentPage(value);
     getDogs(value);
+    window.scrollTo(0, 0);
   };
 
   const getDogs = useCallback(
-    (currentPage, filters) =>
-      getInundogs({ page: currentPage, ...filters }).then((res) => {
+    (currentPage, filters, endereco) =>
+      getInundogs({
+        page: currentPage,
+        ...filters,
+        endereco: { ...endereco },
+      }).then((res) => {
         setData(res);
       }),
     [getInundogs]
@@ -55,6 +64,7 @@ const HomePage = () => {
   };
 
   const handleSearch = () => {
+    // getDogs(1, filters, enderecos);
     getDogs(1, filters);
     setCurrentPage(1);
   };

@@ -172,7 +172,7 @@ body {
 .feed-cards {
   display: flex;
   flex-wrap: wrap;
-  padding: 5%;
+  padding: 3%;
   justify-content: space-evenly;
   background-color: white;
   max-width: 1300px;

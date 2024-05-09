@@ -7,6 +7,11 @@ class InundogsController {
     return await inundogsService.getFilteredInundogs(filtro, page, limit);
   }
 
+  async getEnderecoList() {
+    logger.info("Controller: getFilteredInundogs");
+    return await inundogsService.getEnderecoList();
+  }
+
   async createInundog(inundog) {
     logger.info("Controller: createInundog", inundog);
     return await inundogsService.createInundog(inundog);

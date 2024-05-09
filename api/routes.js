@@ -51,6 +51,10 @@ router.get("/inundogs", (req, res) => {
     .then((data) => res.json(data));
 });
 
+router.get("/enderecos-unicos", async (req, res) => {
+  inundogsController.getEnderecoList().then((data) => res.json(data));
+});
+
 router.post("/inundog", async (req, res) => {
   inundogsController.createInundog(req.body).then((data) => res.json(data));
 });

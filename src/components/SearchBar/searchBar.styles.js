@@ -35,6 +35,9 @@ export const StyledAutoComplete = styled(Autocomplete)`
     color: #371e17;
     border-radius: 15px;
   }
+  .MuiAutocomplete-tag {
+    max-width: calc(75% - 25px);
+  }
   & .MuiOutlinedInput-root {
     border-radius: 15px;
     border-color: transparent;

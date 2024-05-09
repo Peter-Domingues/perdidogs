@@ -1,7 +1,7 @@
 const { connect } = require("../config/db.config");
 const { Inundogs } = require("../models/inundogs.model");
 const logger = require("../logger/api.logger");
-
+const _ = require("lodash");
 class InundogsRepository {
   constructor() {
     connect();
@@ -20,6 +20,19 @@ class InundogsRepository {
       .exec();
 
     return { inundogs, totalPages, currentPage: page };
+  }
+
+  async getEnderecoList() {
+    try {
+      const enderecosUnicos = await Inundogs.aggregate([
+        { $group: { _id: "$endereco" } },
+        { $project: { _id: 0, endereco: "$_id" } },
+      ]);
+
+      return enderecosUnicos;
+    } catch (err) {
+      logger.error("Error::" + err);
+    }
   }
 
   async createInundog(inundog) {
