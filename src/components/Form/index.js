@@ -151,7 +151,9 @@ const Form = () => {
           saude: form.saude,
           castrado: form.castrado,
           contato: form.contato,
-        }).then((res) => setOpen(true))
+        })
+          .then((res) => setOpen(true))
+          .finally(() => handleCancel())
       )[(uploadImage, createInundog)]
   );
 
@@ -163,7 +165,6 @@ const Form = () => {
   };
   const handleFinish = () => {
     createDog();
-    handleCancel();
   };
 
   const handleBack = () => {

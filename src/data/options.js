@@ -9,6 +9,7 @@ export const cidades = [
   "Porto Alegre",
   "São Leopoldo",
   "Viamão",
+  "Outra",
 ];
 
 export const racas = [
@@ -38,7 +39,9 @@ export const racas = [
   "Havanese",
   "Husky Siberiano",
   "Jack Russell Terrier",
+  "Labrador retriever",
   "Lhasa Apso",
+  "Lulu da pomerânia",
   "Maltese",
   "Mastiff",
   "Pastor Alemão",
@@ -62,6 +65,7 @@ export const racas = [
   "Weimaraner",
   "Whippet",
   "Yorkshire Terrier",
+  "Outro",
 ];
 
 export const comportamentos = ["Dócil", "Bravo"];

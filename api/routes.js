@@ -6,20 +6,22 @@ const aws = require("aws-sdk");
 const inundogsController = require("./controllers/inundogs.controller");
 
 const s3 = new aws.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: "us-east-2",
-})
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: "us-east-2",
+});
+
+console.log(s3);
 
 const upload = multer({
-    storage: multerS3({
-        s3: s3,
-        bucket: "perdidogs-bucket",
-        acl: "public-read",
-        key: function (req, file, cb) {
-            cb(null, Date.now().toString() + "-" + file.originalname);
-        }
-    })
+  storage: multerS3({
+    s3: s3,
+    bucket: "perdidogs-bucket",
+    acl: "public-read",
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString() + "-" + file.originalname);
+    },
+  }),
 });
 
 const router = express.Router();
