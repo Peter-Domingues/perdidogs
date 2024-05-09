@@ -26,6 +26,10 @@ const Instas = () => {
       name: "animaisresgatadossarandi",
       link: "https://www.instagram.com/animaisresgatadossarandi/",
     },
+    {
+      name: "animaisdaenchente_nh",
+      link: "https://www.instagram.com/animaisdaenchente_nh/",
+    },
   ];
 
   const lastInstaList = [
@@ -48,6 +52,10 @@ const Instas = () => {
     {
       name: "acheseudogulbra",
       link: "https://www.instagram.com/acheseudogulbra/",
+    },
+    {
+      name: "Mais Perfis Aqui",
+      link: "https://pivitelo.notion.site/PETS-RESGATADOS-DA-ENCHETE-1a25ccd197f04f5fa8e051f0a6dbb162",
     },
   ];
 

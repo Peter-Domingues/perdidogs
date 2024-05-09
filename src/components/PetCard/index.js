@@ -57,7 +57,6 @@ export default function PetCard({
 
   const hasPorte = porte ? `de porte ${porte}, ` : "";
   const hasRaca = raca ? `da raça ${raca}, ` : "";
-  const faixaEtariaSpan = <span className="card-info">{faixaEtaria}</span>;
   const hasFaixaEtaria = faixaEtaria
     ? ` e quem me resgatou acredita que eu seja `
     : "";

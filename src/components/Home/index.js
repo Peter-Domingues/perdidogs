@@ -38,6 +38,10 @@ const HomePage = () => {
   const handleChangeFilters = (filterName) => (e, value) => {
     setFilters((prevFilters) => {
       const updatedFilters = { ...prevFilters, [filterName]: value || "" };
+      if (filterName == "especie" && value == "Gato") {
+        delete updatedFilters["porte"];
+        delete updatedFilters["raca"];
+      }
 
       Object.keys(updatedFilters).forEach((key) => {
         if (updatedFilters[key] === "") {

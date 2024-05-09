@@ -1,6 +1,7 @@
 import { cidades, racas } from "@/data/options";
 import { TextField, Button } from "@mui/material";
 import { StyledAutoComplete, SearchButton } from "./searchBar.styles";
+import { useEffect, useState } from "react";
 
 const SearchBar = ({
   handleChangeFilters,
@@ -11,6 +12,14 @@ const SearchBar = ({
   const especieOptions = ["Cachorro", "Gato"];
   const sexoOptions = ["Macho", "Fêmea"];
   const porteOptions = ["P", "M", "G"];
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    if (filters?.especie == "Gato") {
+      return setIsDisabled(true);
+    }
+    return setIsDisabled(false);
+  }, [filters]);
 
   return (
     <div className="search-container">
@@ -47,6 +56,7 @@ const SearchBar = ({
         disablePortal
         id="combo-box-demo"
         options={porteOptions}
+        disabled={isDisabled}
         sx={{ width: 100 }}
         renderInput={(params) => <TextField {...params} label="Porte" />}
       />
@@ -55,6 +65,7 @@ const SearchBar = ({
         onChange={handleChangeFilters("raca")}
         disablePortal
         id="combo-box-demo"
+        disabled={isDisabled}
         options={racas}
         sx={{ width: 200 }}
         renderInput={(params) => <TextField {...params} label="Raças" />}
