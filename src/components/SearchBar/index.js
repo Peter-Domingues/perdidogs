@@ -10,7 +10,7 @@ const SearchBar = ({
   handleClearFilters,
 }) => {
   const especieOptions = ["Cachorro", "Gato"];
-  const sexoOptions = ["Macho", "Fêmea"];
+  const sexoOptions = ["Macho", "Femea"];
   const porteOptions = ["P", "M", "G"];
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -47,7 +47,7 @@ const SearchBar = ({
         disablePortal
         id="combo-box-demo"
         options={sexoOptions}
-        sx={{ width: 100 }}
+        sx={{ width: 150 }}
         renderInput={(params) => <TextField {...params} label="Sexo" />}
       />
       <StyledAutoComplete
@@ -57,7 +57,7 @@ const SearchBar = ({
         id="combo-box-demo"
         options={porteOptions}
         disabled={isDisabled}
-        sx={{ width: 100 }}
+        sx={{ width: 150 }}
         renderInput={(params) => <TextField {...params} label="Porte" />}
       />
       <StyledAutoComplete

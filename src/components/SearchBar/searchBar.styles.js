@@ -29,8 +29,15 @@ export const SearchButton = styled(Button)`
 export const StyledAutoComplete = styled(Autocomplete)`
   background-color: white;
   margin-right: 10px;
+  border-radius: 15px;
+
   & label.Mui-focused {
     color: #371e17;
+    border-radius: 15px;
+  }
+  & .MuiOutlinedInput-root {
+    border-radius: 15px;
+    border-color: transparent;
   }
   & .MuiInput-underline:after {
     border-bottom-color: #49281f;

@@ -10,6 +10,7 @@ const inundogsSchema = new mongoose.Schema({
   foto: "string",
   endereco: "string",
   porte: "string",
+  faixaEtaria: "string",
   sexo: "string",
   especie: "string",
   observacao: "string",

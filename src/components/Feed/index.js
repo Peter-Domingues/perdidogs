@@ -1,7 +1,7 @@
 import PetCard from "../PetCard";
 import { Pagination } from "@mui/material";
 
-const Feed = ({ data, handleChangePage }) => {
+const Feed = ({ data, handleChangePage, page }) => {
   return (
     <div className="feed-container">
       <div className="feed-cards">
@@ -26,7 +26,11 @@ const Feed = ({ data, handleChangePage }) => {
           ))}
       </div>
 
-      <Pagination count={data?.totalPages} onChange={handleChangePage} />
+      <Pagination
+        count={data?.totalPages}
+        onChange={handleChangePage}
+        page={page}
+      />
     </div>
   );
 };

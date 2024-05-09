@@ -21,19 +21,20 @@ const HomePage = () => {
 
   const handleChangePage = (e, value) => {
     setCurrentPage(value);
+    getDogs(value);
   };
 
   const getDogs = useCallback(
     (currentPage, filters) =>
-      getInundogs({ page: currentPage, ...filters }).then((res) =>
-        setData(res)
-      ),
+      getInundogs({ page: currentPage, ...filters }).then((res) => {
+        setData(res);
+      }),
     [getInundogs]
   );
 
   useEffect(() => {
-    getDogs(currentPage);
-  }, [currentPage]);
+    getDogs(1);
+  }, []);
 
   const handleChangeFilters = (filterName) => (e, value) => {
     setFilters((prevFilters) => {
@@ -55,12 +56,14 @@ const HomePage = () => {
 
   const handleSearch = () => {
     getDogs(1, filters);
+    setCurrentPage(1);
   };
 
   const handleClearFilters = () => {
     dispatch(clearFilters());
     setFilters(null);
     getDogs(1);
+    setCurrentPage(1);
   };
 
   return (
@@ -83,7 +86,11 @@ const HomePage = () => {
         handleSearch={handleSearch}
         filters={filters}
       />
-      <Feed data={data} handleChangePage={handleChangePage} />
+      <Feed
+        data={data}
+        handleChangePage={handleChangePage}
+        page={currentPage}
+      />
       <Divider style={{ width: "80%" }} />
       <Instas />
     </div>

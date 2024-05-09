@@ -33,6 +33,7 @@ export const racas = [
   "Dachshund (Teckel, Salsicha)",
   "Dogue Alemão",
   "Doberman Pinscher",
+  "Fila Brasileiro",
   "Golden Retriever",
   "Great Dane",
   "Griffon de Bruxelas",
