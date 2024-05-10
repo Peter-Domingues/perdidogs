@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 const aws = require("aws-sdk");
+const sharp = require("sharp");
 
 const inundogsController = require("./controllers/inundogs.controller");
 
@@ -11,7 +12,16 @@ const s3 = new aws.S3({
   region: "us-east-2",
 });
 
-console.log(s3);
+// const upload = multer({
+//   storage: multerS3({
+//     s3: s3,
+//     bucket: "perdidogs-bucket",
+//     acl: "public-read",
+//     key: function (req, file, cb) {
+//       cb(null, Date.now().toString() + "-" + file.originalname);
+//     },
+//   }),
+// });
 
 const upload = multer({
   storage: multerS3({
@@ -23,15 +33,71 @@ const upload = multer({
     },
   }),
 });
-
 const router = express.Router();
 
-router.post("/upload", upload.single("image"), (req, res) => {
-  if (!req.file) {
+async function compressImage(buffer, quality, minSize) {
+  if (buffer.length <= minSize) {
+    return buffer; // Skip compression if the image is already below the threshold
+  }
+
+  try {
+    return await sharp(buffer).jpeg({ quality }).toBuffer();
+  } catch (error) {
+    console.error("Error compressing image:", error);
+    throw error;
+  }
+}
+
+router.post("/upload", upload.single("image"), async (req, res) => {
+  const file = req.file;
+
+  if (!file) {
     return res.status(400).send("Nenhum arquivo enviado.");
   }
 
-  res.send(req.file.location);
+  try {
+    const params = {
+      Bucket: file.bucket,
+      Key: file.key,
+    };
+    const { Body } = await s3.getObject(params).promise();
+
+    const minSizeThreshold = 150 * 1024;
+    console.log(Body.length);
+
+    const changeQuality = () => {
+      switch (true) {
+        case Body.length > 2 * 1024 * 1024:
+          return 20;
+        case Body.length > 1 * 1024 * 1024:
+          return 30;
+        case Body.length > 900 * 1024:
+          return 50;
+        default:
+          return 70;
+      }
+    };
+
+    const compressedImageBuffer = await compressImage(
+      Body,
+      changeQuality(),
+      minSizeThreshold
+    );
+
+    const compressedParams = {
+      Bucket: file.bucket,
+      Key: `compressed/${file.key}`,
+      Body: compressedImageBuffer,
+      ACL: "public-read",
+      ContentType: "image/jpeg",
+    };
+    const uploadResult = await s3.upload(compressedParams).promise();
+
+    res.send(uploadResult.Location);
+  } catch (error) {
+    console.error("Error processing image upload:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 router.get("/inundogs", (req, res) => {
@@ -45,6 +111,7 @@ router.get("/inundogs", (req, res) => {
   if (req.query.cidade) filtro.cidade = req.query.cidade;
   if (req.query.comportamento) filtro.comportamento = req.query.comportamento;
   if (req.query.faixaEtaria) filtro.faixaEtaria = req.query.faixaEtaria;
+  if (req.query.endereco) filtro.endereco = req.query.endereco;
 
   inundogsController
     .getFilteredInundogs(filtro, page, limit)

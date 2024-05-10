@@ -1,19 +1,9 @@
 import { cidades, racas } from "@/data/options";
-import {
-  TextField,
-  Button,
-  Autocomplete,
-  CircularProgress,
-} from "@mui/material";
-import {
-  StyledAutoComplete,
-  SearchButton,
-  StyledAutoCompleteMultiple,
-} from "./searchBar.styles";
+import { TextField, Button, CircularProgress } from "@mui/material";
+import { StyledAutoComplete } from "./searchBar.styles";
 import { useCallback, useEffect, useState } from "react";
 import { getEnderecoList } from "@/api/apiService";
-import { useDispatch, useSelector } from "react-redux";
-import { changeEndereco } from "@/store/reducers/formReducer";
+import { useDispatch } from "react-redux";
 import { changeFilterEndereco } from "@/store/reducers/filterReducer";
 
 const SearchBar = ({
@@ -21,9 +11,9 @@ const SearchBar = ({
   handleSearch,
   filters,
   handleClearFilters,
+  endereco,
 }) => {
   const dispatch = useDispatch();
-  const enderecosSelected = useSelector((state) => state.filters.endereco);
   const especieOptions = ["Cachorro", "Gato"];
   const [enderecoOptions, setEnderecosOptions] = useState([]);
   const sexoOptions = ["Macho", "Femea"];
@@ -72,10 +62,10 @@ const SearchBar = ({
         sx={{ width: 200 }}
         renderInput={(params) => <TextField {...params} label="Cidade" />}
       />
-      {/* <StyledAutoComplete
+      <StyledAutoComplete
         multiple
         limitTags={1}
-        defaultValue={enderecosSelected}
+        value={endereco}
         onOpen={handleOpenEndereco}
         onClose={() => {
           setOpen(false);
@@ -105,7 +95,7 @@ const SearchBar = ({
             }}
           />
         )}
-      /> */}
+      />
       <StyledAutoComplete
         value={filters?.especie || ""}
         onChange={handleChangeFilters("especie")}
@@ -148,13 +138,13 @@ const SearchBar = ({
       <div className="search-buttons">
         <button
           className="send-button search-button"
-          disabled={!filters && !enderecosSelected}
+          disabled={!filters && !endereco}
           onClick={handleSearch}
         >
           Buscar
         </button>
         <Button
-          disabled={!filters && !enderecosSelected}
+          disabled={!filters && !endereco}
           onClick={handleClearFilters}
           className="clear-button"
         >

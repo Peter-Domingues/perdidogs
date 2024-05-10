@@ -14,7 +14,7 @@ import {
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const enderecos = useSelector((state) => state.filters.endereco);
+  const endereco = useSelector((state) => state.filters.endereco);
   const [data, setData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState(null);
@@ -25,6 +25,10 @@ const HomePage = () => {
 
   const handleChangePage = (e, value) => {
     setCurrentPage(value);
+    if (filters) {
+      getDogs(value, filters, endereco);
+      return window.scrollTo(0, 0);
+    }
     getDogs(value);
     window.scrollTo(0, 0);
   };
@@ -64,13 +68,13 @@ const HomePage = () => {
   };
 
   const handleSearch = () => {
-    // getDogs(1, filters, enderecos);
-    getDogs(1, filters);
+    getDogs(1, filters, endereco);
     setCurrentPage(1);
   };
-
+  console.log(endereco);
   const handleClearFilters = () => {
     dispatch(clearFilters());
+    dispatch(changeFilterEndereco([]));
     setFilters(null);
     getDogs(1);
     setCurrentPage(1);
@@ -95,6 +99,7 @@ const HomePage = () => {
         handleChangeFilters={handleChangeFilters}
         handleSearch={handleSearch}
         filters={filters}
+        endereco={endereco}
       />
       <Feed
         data={data}
