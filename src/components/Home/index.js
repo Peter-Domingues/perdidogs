@@ -18,7 +18,7 @@ const HomePage = () => {
   const [data, setData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState(null);
-  const feedElement = document.getElementById("feed");
+  const feedElement = document?.getElementById("feed");
 
   const isEmpty = (obj) => {
     return Object.keys(obj).length === 0;
