@@ -18,6 +18,7 @@ const HomePage = () => {
   const [data, setData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState(null);
+  const feedElement = document.getElementById("feed");
 
   const isEmpty = (obj) => {
     return Object.keys(obj).length === 0;
@@ -49,6 +50,10 @@ const HomePage = () => {
     getDogs(1);
   }, []);
 
+  useEffect(() => {
+    if (isEmpty(endereco) && isEmpty(filters || {})) getDogs(1);
+  }, [endereco]);
+
   const handleChangeFilters = (filterName) => (e, value) => {
     setFilters((prevFilters) => {
       const updatedFilters = { ...prevFilters, [filterName]: value || "" };
@@ -62,7 +67,7 @@ const HomePage = () => {
           delete updatedFilters[key];
         }
       });
-      if (isEmpty(updatedFilters)) getDogs(1);
+      if (isEmpty(updatedFilters) && isEmpty(endereco)) getDogs(1);
       return updatedFilters;
     });
   };
@@ -70,8 +75,9 @@ const HomePage = () => {
   const handleSearch = () => {
     getDogs(1, filters, endereco);
     setCurrentPage(1);
+    feedElement.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-  console.log(endereco);
+
   const handleClearFilters = () => {
     dispatch(clearFilters());
     dispatch(changeFilterEndereco([]));

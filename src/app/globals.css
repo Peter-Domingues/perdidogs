@@ -81,9 +81,14 @@ body {
   padding-top: 5%;
   background-color: #f8de7e;
 }
+
 .home-title {
   font-size: 30px;
   font-weight: bold;
+  padding: 20px;
+  background-color: #49281f;
+  border-radius: 12px;
+  color: #f8de7e;
 }
 
 .register-button {

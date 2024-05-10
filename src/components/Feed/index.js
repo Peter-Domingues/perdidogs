@@ -3,7 +3,7 @@ import { Pagination } from "@mui/material";
 
 const Feed = ({ data, handleChangePage, page }) => {
   return (
-    <div className="feed-container">
+    <div className="feed-container" id="feed">
       <div className="feed-cards">
         {data &&
           data?.inundogs?.map((pet) => (
