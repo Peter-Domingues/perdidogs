@@ -28,7 +28,7 @@ export const SearchButton = styled(Button)`
 
 export const StyledAutoComplete = styled(Autocomplete)`
   background-color: white;
-  margin-right: 10px;
+  margin-right: 5px;
   border-radius: 15px;
 
   & label.Mui-focused {

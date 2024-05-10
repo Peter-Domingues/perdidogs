@@ -61,7 +61,7 @@ const Instas = () => {
 
   return (
     <div className="instas-container">
-      <h1 className="title">Não achou seu pet aqui?</h1>
+      <h1 className="home-title">Não achou seu pet aqui?</h1>
       <h1 className="space-top subtitle">
         Confira também os perfis que estão compartilhando fotos e informações
         dos animais resgatados:
@@ -72,9 +72,9 @@ const Instas = () => {
             <List>
               {firstInstaList.map((item) => (
                 <Link href={item.link} target="_blank">
-                  <ListItem disablePadding>
+                  <ListItem disablePadding style={{ color: "white" }}>
                     <ListItemButton>
-                      <ListItemIcon>@</ListItemIcon>
+                      <ListItemIcon style={{ color: "white" }}>@</ListItemIcon>
                       <ListItemText primary={item.name} />
                     </ListItemButton>
                   </ListItem>
@@ -88,9 +88,9 @@ const Instas = () => {
             <List>
               {lastInstaList.map((item) => (
                 <Link href={item.link} target="_blank">
-                  <ListItem disablePadding>
+                  <ListItem style={{ color: "white" }} disablePadding>
                     <ListItemButton>
-                      <ListItemIcon>@</ListItemIcon>
+                      <ListItemIcon style={{ color: "white" }}>@</ListItemIcon>
                       <ListItemText primary={item.name} />
                     </ListItemButton>
                   </ListItem>
