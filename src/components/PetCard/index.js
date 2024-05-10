@@ -62,7 +62,7 @@ export default function PetCard({
     : "";
 
   const subject = `Informe de ${especie} encontrado`;
-  const body = `Oi, minha família me encontrou!\n\n<img src="${foto}" />\nSexo: ${sexo}\nCidade: ${cidade}`;
+  const body = `Oi, minha família me encontrou!\n\nFoto: ${foto}\nSexo: ${sexo}\nCidade: ${cidade}`;
 
   return (
     <Card sx={{ maxWidth: 345 }} className="card-container">
