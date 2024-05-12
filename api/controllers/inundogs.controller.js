@@ -8,7 +8,7 @@ class InundogsController {
   }
 
   async getEnderecoList() {
-    logger.info("Controller: getFilteredInundogs");
+    logger.info("Controller: getEnderecoList");
     return await inundogsService.getEnderecoList();
   }
 

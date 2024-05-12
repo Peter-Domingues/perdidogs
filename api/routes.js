@@ -5,23 +5,14 @@ const aws = require("aws-sdk");
 const sharp = require("sharp");
 
 const inundogsController = require("./controllers/inundogs.controller");
+const laresController = require("./controllers/lares.controller");
+const sumidogsController = require("./controllers/sumidogs.controller");
 
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: "us-east-2",
 });
-
-// const upload = multer({
-//   storage: multerS3({
-//     s3: s3,
-//     bucket: "perdidogs-bucket",
-//     acl: "public-read",
-//     key: function (req, file, cb) {
-//       cb(null, Date.now().toString() + "-" + file.originalname);
-//     },
-//   }),
-// });
 
 const upload = multer({
   storage: multerS3({
@@ -33,6 +24,7 @@ const upload = multer({
     },
   }),
 });
+
 const router = express.Router();
 
 async function compressImage(buffer, quality, minSize) {
@@ -122,8 +114,48 @@ router.get("/enderecos-unicos", async (req, res) => {
   inundogsController.getEnderecoList().then((data) => res.json(data));
 });
 
+router.get("/lares", (req, res) => {
+  const filtro = {};
+  const { page = 1, limit = 6 } = req.query;
+
+  if (req.query.porte) filtro.porte = req.query.porte;
+  if (req.query.sexo) filtro.sexo = req.query.sexo;
+  if (req.query.cidade) filtro.cidade = req.query.cidade;
+  if (req.query.transporte) filtro.transporte = req.query.transporte;
+  if (req.query.especie) filtro["capacidade.especie"] = req.query.especie;
+
+  laresController
+    .getFilteredLares(filtro, page, limit)
+    .then((data) => res.json(data));
+});
+
+router.get("/sumidogs", (req, res) => {
+  const filtro = {};
+  const { page = 1, limit = 6 } = req.query;
+
+  if (req.query.raca) filtro.raca = req.query.raca;
+  if (req.query.porte) filtro.porte = req.query.porte;
+  if (req.query.sexo) filtro.sexo = req.query.sexo;
+  if (req.query.especie) filtro.especie = req.query.especie;
+  if (req.query.cidade) filtro.cidade = req.query.cidade;
+  if (req.query.comportamento) filtro.comportamento = req.query.comportamento;
+  if (req.query.faixaEtaria) filtro.faixaEtaria = req.query.faixaEtaria;
+
+  sumidogsController
+    .getFilteredSumidogs(filtro, page, limit)
+    .then((data) => res.json(data));
+});
+
 router.post("/inundog", async (req, res) => {
   inundogsController.createInundog(req.body).then((data) => res.json(data));
+});
+
+router.post("/lar", async (req, res) => {
+  laresController.createLar(req.body).then((data) => res.json(data));
+});
+
+router.post("/sumidog", async (req, res) => {
+  sumidogsController.createSumidog(req.body).then((data) => res.json(data));
 });
 
 router.put("/inundog/:id", (req, res) => {
@@ -132,9 +164,31 @@ router.put("/inundog/:id", (req, res) => {
     .then((data) => res.json(data));
 });
 
+router.put("/lar/:id", (req, res) => {
+  laresController
+    .updateLar({ _id: req.params.id }, req.body)
+    .then((data) => res.json(data));
+});
+
+router.put("/sumidog/:id", (req, res) => {
+  sumidogsController
+    .updateSumidog({ _id: req.params.id }, req.body)
+    .then((data) => res.json(data));
+});
+
 router.delete("/inundog/:id", (req, res) => {
   inundogsController
     .deleteInundog(req.params.id)
+    .then((data) => res.json(data));
+});
+
+router.delete("/lar/:id", (req, res) => {
+  laresController.deleteLar(req.params.id).then((data) => res.json(data));
+});
+
+router.delete("/sumidog/:id", (req, res) => {
+  sumidogsController
+    .deleteSumidog(req.params.id)
     .then((data) => res.json(data));
 });
 

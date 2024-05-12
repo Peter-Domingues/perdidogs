@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  // baseURL: `https://www.perdidogs.com.br`,
   baseURL: process.env.API_BASE_URL,
 });
 
@@ -23,7 +22,6 @@ export const uploadImage = async (file) => {
 };
 
 export const getInundogs = async (params) => {
-  console.log(params);
   try {
     const response = await apiClient.get("/api/inundogs", { ...{ params } });
     return response.data;
@@ -43,6 +41,26 @@ export const getEnderecoList = async () => {
   }
 };
 
+export const getLares = async (params) => {
+  try {
+    const response = await apiClient.get("/api/lares", { ...{ params } });
+    return response.data;
+  } catch (error) {
+    console.error("Error while fetching lares:", error);
+    throw error;
+  }
+};
+
+export const getSumidogs = async (params) => {
+  try {
+    const response = await apiClient.get("/api/sumidogs", { ...{ params } });
+    return response.data;
+  } catch (error) {
+    console.error("Error while fetching sumidogs:", error);
+    throw error;
+  }
+};
+
 export const createInundog = async (inundogData) => {
   try {
     console.log({ inundogData });
@@ -50,6 +68,28 @@ export const createInundog = async (inundogData) => {
     return response.data;
   } catch (error) {
     console.error("Error while creating inundog:", error);
+    throw error;
+  }
+};
+
+export const createLar = async (larData) => {
+  try {
+    console.log({ larData });
+    const response = await apiClient.post("/api/lar", larData);
+    return response.data;
+  } catch (error) {
+    console.error("Error while creating lar:", error);
+    throw error;
+  }
+};
+
+export const createSumidog = async (sumidogData) => {
+  try {
+    console.log({ sumidogData });
+    const response = await apiClient.post("/api/sumidog", sumidogData);
+    return response.data;
+  } catch (error) {
+    console.error("Error while creating sumidog:", error);
     throw error;
   }
 };
@@ -67,12 +107,55 @@ export const updateInundog = async (inundogId, inundogData) => {
   }
 };
 
+export const updateLar = async (larId, larData) => {
+  try {
+    const response = await apiClient.put(`/api/lar/${larId}`, larData);
+    return response.data;
+  } catch (error) {
+    console.error(`Error while updating lar with ID ${larId}:`, error);
+    throw error;
+  }
+};
+
+export const updateSumidog = async (sumidogId, sumidogData) => {
+  try {
+    const response = await apiClient.put(
+      `/api/sumidog/${sumidogId}`,
+      sumidogData
+    );
+    return response.data;
+  } catch (error) {
+    console.error(`Error while updating sumidog with ID ${sumidogId}:`, error);
+    throw error;
+  }
+};
+
 export const deleteInundog = async (inundogId) => {
   try {
     const response = await apiClient.delete(`/api/inundog/${inundogId}`);
     return response.data;
   } catch (error) {
     console.error(`Error while deleting inundog with ID ${inundogId}:`, error);
+    throw error;
+  }
+};
+
+export const deleteLar = async (larId) => {
+  try {
+    const response = await apiClient.delete(`/api/lar/${larId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error while deleting lar with ID ${larId}:`, error);
+    throw error;
+  }
+};
+
+export const deleteSumidog = async (sumidogId) => {
+  try {
+    const response = await apiClient.delete(`/api/sumidog/${sumidogId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error while deleting sumidog with ID ${sumidogId}:`, error);
     throw error;
   }
 };
