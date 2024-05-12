@@ -2,6 +2,7 @@ const { connect } = require("../config/db.config");
 const { Inundogs } = require("../models/inundogs.model");
 const logger = require("../logger/api.logger");
 const _ = require("lodash");
+
 class InundogsRepository {
   constructor() {
     connect();
@@ -19,7 +20,7 @@ class InundogsRepository {
       .sort({ createdAt: -1 })
       .exec();
 
-    return { inundogs, totalPages, currentPage: page };
+    return { values: inundogs, totalPages, currentPage: page };
   }
 
   async getEnderecoList() {
